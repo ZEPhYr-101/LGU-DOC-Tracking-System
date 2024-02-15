@@ -2,6 +2,8 @@
 use App\Livewire\User\Dashboard;
 use App\Livewire\User\Register;
 use App\Livewire\User\Login;
+use App\Livewire\Admin\AdminDashboard;
+use App\Livewire\Admin\AdminLogin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
 Route::get('/user/register', Register::class)->name('user.register');
 Route::get('/user/login', Login::class)->name('user.login');
+
+//admin routes
+
+Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
+Route::get('/admin/login', AdminLogin::class)->name('admin.admin-login');
