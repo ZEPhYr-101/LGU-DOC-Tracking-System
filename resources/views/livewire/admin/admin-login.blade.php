@@ -10,10 +10,11 @@
         <div class="col" style="flex: 1; max-width: 75%; display: flex; justify-content: center; align-items: center;">
             <img src="{{ asset('images/Green Mint globalnet technology Logo (1).png') }}" alt="Doc Track img" style="max-width: 150%; max-height: 150%; " width="600" height="550" />
         </div>
-        <div class="col" style="flex: 1; max-width: 50%;">
+        
+        <div class="col" style="flex: 1; max-width: 50%;margin: 0 auto;">
                 
                     <div class="card-header" style="background-color: white;">
-                        <h3 class="text-center font-weight-light my-4">Login</h3>
+                        <h2 class="text-center font-weight-light my-4">Admin Login</h2>
                     </div>
                     <div class="card-body">
                         @if (session()->has('success'))
@@ -34,9 +35,9 @@
                         @endif
                         <form wire:submit.prevent='login'>
                             <div class="form-group">
-                                <label class="small mb-1">Email</label>
-                                <input class="form-control py-4" wire:model='email' type="email"
-                                    placeholder="Enter email address" />
+                                <label class="small mb-1">Username</label>
+                                <input class="form-control py-4" wire:model='username' id='username' type="text"
+                                    placeholder="Enter username" />
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -49,15 +50,16 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                <buttt class="small" href="password.html">Forgot Password?</buttt>
-                                <button class="btn btn-primary" type="submit">Login</button>
+                            <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
+                                <button class="btn btn-primary" type="submit">
+                                <span wire:loading.remove wire:target='login'>Login</span>
+                                    <span wire:loading wire:target='login'>Login....</span>
+                                </button>
+                                
                             </div>
                         </form>
                     </div>
-                    <div class="card-footer text-center">
-                        
-                    </div>
+                   
                 </div>
             </div>
         </div>
