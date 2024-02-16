@@ -64,7 +64,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1">Confirm Password</label>
-                                        <input class="form-control py-4" wire:model='password' type="password"
+                                        <input class="form-control py-4" wire:model='c_password' type="password"
                                             placeholder="Enter password" />
                                         @error('password')
                                             <span class="text-danger">{{ $message }}</span>
@@ -76,10 +76,10 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="small mb-1">Department</label>
-                                        <input class="form-control py-4" wire:model='lname' type="text"
+                                        <input class="form-control py-4" wire:model='dept' type="text"
                                             placeholder="Enter Department" />
-                                        @error('lname')
-                                            <span class="text-danger">{{ $lname }}</span>
+                                        @error('dept')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
