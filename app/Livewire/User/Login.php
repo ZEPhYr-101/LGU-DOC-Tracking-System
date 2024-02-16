@@ -14,20 +14,24 @@ class Login extends Component
     }
 
     public function login()
-    {
-        $this->validate([
-            'email' => ['email', 'required'],
-            'password' => ['required', 'string', 'min:3', 'max:12']
-        ]);
-        $users = Auth::attempt(['email' => $this->email, 'password' => $this->password]);
-        if ($users) {
-            if (Auth::user()->remember_token == "0") {
-                session()->flash('error', 'Please Verifiy your email');
-            } else {
-                return redirect(route('user.dashboard'));
-            }
-        } else {
-            session()->flash('error', 'Invalid Email and password');
-        }
+{
+    $this->validate([
+        'email' => ['email', 'required'],
+        'password' => ['required', 'string', 'min:3', 'max:12']
+    ]);
+
+    $user = \App\Models\User::where('email', $this->email)->first();
+
+    if ($user && $user->remember_token == "0") {
+        session()->flash('error', 'Please verify your email');
+        return;
     }
+
+    if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+        return redirect(route('user.dashboard'));
+    } else {
+        session()->flash('error', 'Invalid email and password');
+    }
+}
+
 }
