@@ -19,13 +19,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
-Route::get('/user/register', Register::class)->name('user.register');
-Route::get('/user/login', Login::class)->name('user.login');
-
+Route::middleware(['web'])->group(function () {
+    Route::get('user/register', Register::class)->name('user.register');
+    Route::get('user/login', Login::class)->name('user.login');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
+});
 //admin routes
 
-Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
-Route::get('/admin/login', AdminLogin::class)->name('admin.admin-login');
+Route::middleware(['guest:admin'])->group(function () {
+    Route::get('/admin/login', AdminLogin::class)->name('admin.login');
+});
 
-Route::get('/admin/users', ApproveUser::class)->name('admin.users');
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
+   
+    Route::get('/admin/users', ApproveUser::class)->name('admin.users');
+    
+});

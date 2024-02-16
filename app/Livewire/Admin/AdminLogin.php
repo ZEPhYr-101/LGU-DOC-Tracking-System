@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Admin;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Auth\Middleware;
 use Livewire\Component;
 
 class AdminLogin extends Component

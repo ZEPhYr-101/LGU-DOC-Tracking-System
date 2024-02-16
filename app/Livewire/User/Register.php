@@ -33,6 +33,7 @@ class Register extends Component
         $users->email = $this->email;
         $users->password = Hash::make($this->password);
         $users->dept = $this->dept;
+        $users->remember_token = 0;
 
         $result = $users->save();
         if ($result) {

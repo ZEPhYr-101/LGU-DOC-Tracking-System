@@ -27,6 +27,7 @@ class ApproveUser extends Component
     {
         $user = User::findOrFail($id);
         $user->remember_token = 1;
+        $user->email_verified_at = now();
         $result = $user->save();
         if ($result) {
             session()->flash('success', 'Admin Approve User');
