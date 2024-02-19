@@ -19,6 +19,7 @@ class UserManagement extends Component
         $users = User::orderBy('id', 'DESC')->paginate(10);
         $this->totalUser = User::count();
         return view('livewire.admin.user-management', compact('users'))->layout('layouts.main');
+        
     }
 
     public function approve($id)
@@ -41,4 +42,9 @@ class UserManagement extends Component
             $this->redirect('user-management', 'showSuccessMessage');
         }
     }
+    public function editUserForm($id)
+    {
+        return redirect()->route('editUserForm', ['id' => $id]);
+    }   
+
 }

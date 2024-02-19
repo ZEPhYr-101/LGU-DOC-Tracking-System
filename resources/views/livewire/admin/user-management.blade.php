@@ -81,7 +81,7 @@
                                                 @endif
                                                 <button wire:click='delete({{ $user->id }})'
                                                     class="btn btn-sm btn-danger">Delete</button>
-                                                <button type="button" class="btn btn-warning" data-toggle="modal">
+                                                <button wire:click='editUserForm({{ $user->id }})' type="button" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                     Edit
                                                 </button>

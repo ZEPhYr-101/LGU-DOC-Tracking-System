@@ -10,6 +10,7 @@ use App\Livewire\Admin\Documents;
 use App\Livewire\Admin\UserManagement;
 use App\Livewire\Admin\AccessLog;
 use App\Livewire\Admin\TrackingLog;
+use App\Livewire\Admin\EditUserForm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/access-log', AccessLog::class)->name('AccessLog');
     Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');
+    Route::get('admin/edit-user-form/{id}', EditUserForm::class)->name('editUserForm');
+
 });
