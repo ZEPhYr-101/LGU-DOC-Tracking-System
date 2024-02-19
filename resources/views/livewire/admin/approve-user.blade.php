@@ -34,10 +34,10 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{!! $user->remember_token == 1 ? '<span class="text-success">Approved</span>' : '<span class="text-danger">Not Approved</span>' !!}
+                                    <td>{!! $user->is_Accepted == 1 ? '<span class="text-success">Approved</span>' : '<span class="text-danger">Not Approved</span>' !!}
                                     </td>
                                     <td>
-                                        @if ($user->remember_token == 1)
+                                        @if ($user->is_Accepted== 1)
                                             <button disabled class="btn btn-success">Approved</button>
                                         @else
                                             <button wire:click='approve({{ $user->id }})'
