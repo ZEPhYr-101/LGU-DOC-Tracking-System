@@ -13,7 +13,7 @@
         @endif
         <div class="card my-2">
             <div class="card-header">
-                <h3>Approve User ( {{ $totalUser }} ) </h3>
+                <h3>Total User ( {{ $totalUser }} ) </h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
