@@ -52,6 +52,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Department</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -60,8 +61,9 @@
                                 @forelse ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->fname . ' ' . $user->lname }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->dept }}</td>
                                         <td>
                                             @if ($user->is_Accepted == 1)
                                                 <span class="badge bg-success">Approved</span>
