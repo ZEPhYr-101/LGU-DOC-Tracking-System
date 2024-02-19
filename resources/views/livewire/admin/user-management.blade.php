@@ -63,7 +63,7 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            @if ($user->remember_token == 1)
+                                            @if ($user->is_Accepted == 1)
                                                 <span class="badge bg-success">Approved</span>
                                             @else
                                                 <span class="badge bg-danger">Not Approved</span>
@@ -71,7 +71,7 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                @if ($user->remember_token == 1)
+                                                @if ($user->is_Accepted == 1)
                                                     <button disabled class="btn btn-sm btn-success">Approved</button>
                                                 @else
                                                     <button wire:click='approve({{ $user->id }})'

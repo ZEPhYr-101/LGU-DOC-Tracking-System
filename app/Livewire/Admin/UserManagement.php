@@ -24,7 +24,7 @@ class UserManagement extends Component
     public function approve($id)
     {
         $user = User::findOrFail($id);
-        $user->remember_token = 1;
+        $user->is_Accepted = 1;
         $user->email_verified_at = now();
         $result = $user->save();
         if ($result) {
