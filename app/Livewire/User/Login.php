@@ -22,7 +22,7 @@ class Login extends Component
 
     $user = \App\Models\User::where('email', $this->email)->first();
 
-    if ($user && $user->remember_token == "0") {
+    if ($user && $user->is_Accepted == "0") {
         session()->flash('error', 'Please verify your email');
         return;
     }

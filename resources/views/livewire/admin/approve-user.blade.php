@@ -13,7 +13,7 @@
         @endif
         <div class="card my-2">
             <div class="card-header">
-                <h3>Approve User ( {{ $totalUser }} ) </h3>
+                <h3>Total User ( {{ $totalUser }} ) </h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -34,10 +34,10 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{!! $user->remember_token == 1 ? '<span class="text-success">Approved</span>' : '<span class="text-danger">Not Approved</span>' !!}
+                                    <td>{!! $user->is_Accepted == 1 ? '<span class="text-success">Approved</span>' : '<span class="text-danger">Not Approved</span>' !!}
                                     </td>
                                     <td>
-                                        @if ($user->remember_token == 1)
+                                        @if ($user->is_Accepted== 1)
                                             <button disabled class="btn btn-success">Approved</button>
                                         @else
                                             <button wire:click='approve({{ $user->id }})'
