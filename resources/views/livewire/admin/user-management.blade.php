@@ -60,7 +60,7 @@
                                 @forelse ($users as $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->fname . ' ' . $user->lname }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             @if ($user->is_Accepted == 1)
@@ -79,6 +79,10 @@
                                                 @endif
                                                 <button wire:click='delete({{ $user->id }})'
                                                     class="btn btn-sm btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
