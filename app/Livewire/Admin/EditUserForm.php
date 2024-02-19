@@ -80,7 +80,7 @@ class EditUserForm extends Component
         }
 
         if (isset($validatedData['dept'])) {
-            $user->email = $validatedData['dept'];
+            $user->dept = $validatedData['dept'];
         }
         $user->save();
 
