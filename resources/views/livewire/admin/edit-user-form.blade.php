@@ -37,8 +37,12 @@
                 <input type="text" wire:model="lname" class="form-control" id="name" placeholder="{{ $user->lname }}">
             </div>
             <div class="form-group">
-                <label for="email">Email address: </label>
+                <label for="email">Email Address: </label>
                 <input type="email" wire:model="email" class="form-control" id="email" placeholder="{{ $user->email }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Department: </label>
+                <input type="text" wire:model="dept" class="form-control" id="dept" placeholder="{{ $user->dept }}">
             </div>
         
 

@@ -4,9 +4,12 @@ namespace App\Livewire\Admin;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EditUserForm extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public function render()
     {
         $user = User::findOrFail($this->id);
@@ -20,6 +23,7 @@ class EditUserForm extends Component
     public $fname;
     public $lname;
     public $email;
+    public $dept;
 
     protected $listeners = ['editUser', 'showEditUserForm', 'hideEditUserForm'];
 
@@ -31,17 +35,32 @@ class EditUserForm extends Component
         $this->fname = $user->fname;
         $this->lname = $user->lname;
         $this->email = $user->email;
+        $this->dept = $user->dept;
 
         $this->emit('showEditUserForm'); // Emit an event to show the edit user form
     }
 
     public function update()
 {
-    $validatedData = $this->validate([
-        'fname' => 'sometimes|required|string|unique:users,fname,' . $this->id,
-        'lname' => 'sometimes|required|string|unique:users,lname,' . $this->id,
-        'email' => 'sometimes|required|email|unique:users,email,' . $this->id,
-    ]);
+    $rules = [];
+
+    if (!empty($this->fname)) {
+        $rules['fname'] = 'string|unique:users,fname,' . $this->id;
+    }
+
+    if (!empty($this->lname)) {
+        $rules['lname'] = 'string|unique:users,lname,' . $this->id;
+    }
+
+    if (!empty($this->email)) {
+        $rules['email'] = 'email|unique:users,email,' . $this->id;
+    }
+
+    if (!empty($this->dept)) {
+        $rules['dept'] = 'string|unique:users,dept,' . $this->id;
+    }
+
+    $validatedData = $this->validate($rules);
 
     try {
         // Find the user by ID and update the fields
@@ -60,6 +79,9 @@ class EditUserForm extends Component
             $user->email = $validatedData['email'];
         }
 
+        if (isset($validatedData['dept'])) {
+            $user->email = $validatedData['dept'];
+        }
         $user->save();
 
         session()->flash('success', 'User Updated Successfully');
@@ -68,4 +90,5 @@ class EditUserForm extends Component
         session()->flash('error', 'Error updating user: ' . $e->getMessage());
     }
 }
+
 }
