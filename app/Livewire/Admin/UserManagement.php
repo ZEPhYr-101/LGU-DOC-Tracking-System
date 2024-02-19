@@ -6,15 +6,13 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ApproveUser extends Component
+class UserManagement extends Component
 {
+    use WithPagination;
 
     public $totalUser;
-    use WithPagination;
-    public function pageinationView()
-    {
-        return 'custom-pagination-links-view';
-    }
+
+    protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
@@ -30,7 +28,8 @@ class ApproveUser extends Component
         $user->email_verified_at = now();
         $result = $user->save();
         if ($result) {
-            session()->flash('success', 'Admin Approve User');
+            session()->flash('success', 'Admin Approved User');
+            $this->redirect('user-management', 'showSuccessMessage');
         }
     }
 
@@ -38,7 +37,8 @@ class ApproveUser extends Component
     {
         $user = User::findOrFail($id)->delete();
         if ($user) {
-            session()->flash('success', 'User Delete Successfully');
+            session()->flash('success', 'User Deleted Successfully');
+            $this->redirect('user-management', 'showSuccessMessage');
         }
     }
 }

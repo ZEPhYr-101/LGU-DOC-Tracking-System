@@ -1,10 +1,15 @@
 <?php
+
 use App\Livewire\User\Dashboard;
 use App\Livewire\User\Register;
 use App\Livewire\User\Login;
 use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\AdminLogin;
 use App\Livewire\Admin\ApproveUser;
+use App\Livewire\Admin\Documents;
+use App\Livewire\Admin\UserManagement;
+use App\Livewire\Admin\AccessLog;
+use App\Livewire\Admin\TrackingLog;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +39,10 @@ Route::middleware(['guest:admin'])->group(function () {
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
-   
+
     Route::get('/admin/users', ApproveUser::class)->name('admin.users');
-    
+    Route::get('admin/documents', Documents::class)->name('documents');
+    Route::get('admin/access-log', AccessLog::class)->name('AccessLog');
+    Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
+    Route::get('admin/user-management', UserManagement::class)->name('userManagement');
 });
