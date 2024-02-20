@@ -85,7 +85,10 @@ class EditUserForm extends Component
         $user->save();
 
         session()->flash('success', 'User Updated Successfully');
-        $this->emit('hideEditUserForm'); // Emit an event to hide the edit user form
+        $this->emit('hideEditUserForm'); 
+        // Emit an event to hide the edit user form
+        // Redirect to the user-management route
+        return redirect()->route('user-management');
     } catch (\Exception $e) {
         session()->flash('error', 'Error updating user: ' . $e->getMessage());
     }
