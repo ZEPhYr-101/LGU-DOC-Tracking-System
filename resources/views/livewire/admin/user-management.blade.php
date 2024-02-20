@@ -41,9 +41,10 @@
                 </script>
             @endif
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Approve User ({{ $totalUser }})</h3>
-                </div>
+            <div class="card-header  text-right">
+  
+    <h3 class="card-title">Total User: <strong>{{ $totalUser }}</strong></h3>
+</div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -89,6 +90,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    
                                 @empty
                                     <tr>
                                         <td colspan="5" class="text-center">No users found.</td>
@@ -98,6 +100,7 @@
                         </table>
                     </div>
                 </div>
+                
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
