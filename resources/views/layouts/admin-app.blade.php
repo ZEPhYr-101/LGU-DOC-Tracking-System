@@ -121,9 +121,9 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: {{ $current_route == 'documents' ? 'block' : 'none' }};">
+                        <ul class="nav nav-treeview" style="display: {{ $current_route == '/admin/documents' ? 'block' : 'none' }};">
                             <li class="nav-item">
-                                <a href="{{ route('documents') }}" class="nav-link {{ $current_route == 'documents' ? 'active' : '' }}">
+                                <a href="{{ route('admin.documents') }}" class="nav-link {{ $current_route == '/admin/documents' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Executive Order</p>
                                 </a>

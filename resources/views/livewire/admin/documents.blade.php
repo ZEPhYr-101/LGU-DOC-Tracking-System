@@ -28,8 +28,10 @@
                                 <label>Upload Document</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input"
-                                            id="exampleInputFile1">
+                                    <input type="file" wire:model='document' class="form-control">
+                                        @error('document')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         <label class="custom-file-label" for="exampleInputFile1">Choose
                                             file</label>
                                     </div>
@@ -38,16 +40,20 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Document Name</label>
-                                <input type="text" class="form-control" placeholder="Enter ..."
-                                    id="documentName1">
+                            <label for="">Enter Document Name</label>
+                                <input type="text" wire:model='documentName' class="form-control">
+                                @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Category</label>
-                                <input type="text" class="form-control" placeholder="Enter ..."
-                                    id="category1">
+                                <label for="">Enter Category</label>
+                                <input type="text" wire:model='category' class="form-control">
+                                @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -55,16 +61,15 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Enter ..." id="description1"></textarea>
+                                 <input type="text" wire:model='description' class="form-control">
+                        @error('title')
+                            <span class="text-danger">{{ $message }}</span>
+                        
+                                <textarea type="text" wire:model='description' class="form-control" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
+                                @enderror
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Department</label>
-                                <input type="text" class="form-control" placeholder="Enter ..."
-                                    id="department1">
-                            </div>
-                        </div>
+
                     </div>
                 </form>
             </div>
@@ -94,72 +99,39 @@
                         <table class="table table-head-fixed text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>#</th>
+                                    <th>Document Name</th>
                                     <th>User</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Reason</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Document</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>183</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>219</td>
-                                    <td>Alexander Pierce</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>657</td>
-                                    <td>Bob Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>175</td>
-                                    <td>Mike Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>134</td>
-                                    <td>Jim Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>494</td>
-                                    <td>Victoria Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>832</td>
-                                    <td>Michael Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>982</td>
-                                    <td>Rocky Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
+                                @forelse ($documents as $document)
+                                    <tr>
+                                        <td>{{ $document->id }}</td>
+                                        <td>{{ $document->documentName }}</td>
+                                        <td>{{ $document->users->fname . ' ' . $document->users->lname }}</td>
+                                        <td>{{ $document->category }}</td>
+                                        <td>{{ $document->description }}</td>
+                                        <td>{{ $document->document }}</td>
+                                        <td><button wire:click='edit({{ $document->id }})'
+                                                class="btn btn-primary">Edit</button></td>
+                                        <td><button wire:click='delete({{ $document->id }})'
+                                                class="btn btn-danger">Delete</button></td>
+                                    </tr>
+                                @empty
+                                    <h4>Document Not Found</h4>
+                                @endforelse
                             </tbody>
+                        
                         </table>
+                        <div class="text-center">
+                            {{ $documents->links('custom-pagination-links-view') }}
+                        </div>
                     </div>
 
                 </div>

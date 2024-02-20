@@ -60,7 +60,8 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Users
                         </a>
-                        <a class="nav-link" >
+                        </a>
+                        <a class="nav-link" href="{{ route('user.documents') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Document
                         </a>
