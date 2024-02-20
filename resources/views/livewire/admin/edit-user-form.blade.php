@@ -23,11 +23,15 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    @if (session()->has('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
-                    @endif
+                @if (session()->has('success'))
+                <script>
+                    document.addEventListener('livewire:load', function() {
+                        window.livewire.on('showSuccessMessage', function(message) {
+                            toastr.success(message);
+                        });
+                    });
+                </script>
+            @endif
 
                     <form wire:submit.prevent="update">
                         <div class="form-group">

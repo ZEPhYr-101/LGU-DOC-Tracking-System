@@ -18,12 +18,17 @@ class EditUserForm extends Component
             'user' => $user,
         ])->layout('layouts.main');
     }
+    public function hideEditUserForm()
+    {
+        $this->editUserFormVisible = false;
+    }
 
     public $id;
     public $fname;
     public $lname;
     public $email;
     public $dept;
+    public $editUserFormVisible = false;
 
     protected $listeners = ['editUser', 'showEditUserForm', 'hideEditUserForm'];
 
@@ -82,13 +87,14 @@ class EditUserForm extends Component
         if (isset($validatedData['dept'])) {
             $user->dept = $validatedData['dept'];
         }
-        $user->save();
-
-        session()->flash('success', 'User Updated Successfully');
-        $this->emit('hideEditUserForm'); 
+        $result = $user->save();
+        if ($result) {
+            session()->flash('success', 'User updated uccessfully!');
+            $this->redirect('/admin/user-management', 'showSuccessMessage');
+        }
         // Emit an event to hide the edit user form
         // Redirect to the user-management route
-        return redirect()->route('user-management');
+        //return redirect()->route('user-management', 'showSuccessMesssage');
     } catch (\Exception $e) {
         session()->flash('error', 'Error updating user: ' . $e->getMessage());
     }
