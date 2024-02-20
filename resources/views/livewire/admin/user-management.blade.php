@@ -40,18 +40,10 @@
                     });
                 </script>
             @endif
-<<<<<<< HEAD
             <div class="card card-warning">
                 <div class="card-header">
                     <h3 class="card-title">Total User: <span style="font-weight:bold">{{ $totalUser }}</span></h3>
                 </div>
-=======
-            <div class="card">
-            <div class="card-header  text-right">
-  
-    <h3 class="card-title">Total User: <strong>{{ $totalUser }}</strong></h3>
-</div>
->>>>>>> 445cee8cd82c75abbafcc6f9e7bedac61e174286
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -97,7 +89,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    
+
                                 @empty
                                     <tr>
                                         <td colspan="5" class="text-center">No users found.</td>
@@ -107,7 +99,7 @@
                         </table>
                     </div>
                 </div>
-                
+
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
