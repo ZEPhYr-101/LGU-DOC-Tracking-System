@@ -40,7 +40,7 @@
                     });
                 </script>
             @endif
-            <div class="card card-warning">
+            <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">Total User: <span style="font-weight:bold">{{ $totalUser }}</span></h3>
                 </div>
