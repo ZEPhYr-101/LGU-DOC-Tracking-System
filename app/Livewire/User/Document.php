@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\User;
 
 use App\Models\Document as ModelsDocument;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +9,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class Documents extends Component
+class Document extends Component
 {
     public
         $document,
@@ -37,7 +37,7 @@ class Documents extends Component
     {
         $documents = ModelsDocument::orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
         $this->totalDocuments = ModelsDocument::count();
-        return view('livewire.user.document', compact('documents'))->layout('layouts.main');
+        return view('livewire.user.document', compact('documents'))->layout('layouts.user-app');
     }
 
     public function goBack()
