@@ -40,13 +40,68 @@
                     });
                 </script>
             @endif
-            <div class="row justify-content-center">
-                <div class="col-md-10"> <!-- Adjust the column size based on your layout -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Total User: <span style="font-weight:bold">{{ $totalUser }}</span>
-                            </h3>
-                        </div>
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Total User: <span style="font-weight:bold">{{ $totalUser }}</span></h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($users as $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->fname . ' ' . $user->lname }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $user->dept }}</td>
+                                        <td>
+                                            @if ($user->is_Accepted == 1)
+                                                <span class="badge bg-success">Approved</span>
+                                            @else
+                                                <span class="badge bg-danger">Not Approved</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                @if ($user->is_Accepted == 1)
+                                                    <button disabled class="btn btn-sm btn-success">Approved</button>
+                                                @else
+                                                    <button wire:click='approve({{ $user->id }})'
+                                                        class="btn btn-sm btn-success">Approve</button>
+                                                @endif
+                                                <button wire:click='delete({{ $user->id }})'
+                                                    class="btn btn-sm btn-danger">Delete</button>
+                                                <button wire:click='editUserForm({{ $user->id }})' type="button"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                                <button wire:click='changePassword({{ $user->id }})' type="button"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">No users found.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

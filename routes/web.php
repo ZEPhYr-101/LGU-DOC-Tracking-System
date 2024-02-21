@@ -11,6 +11,7 @@ use App\Livewire\Admin\UserManagement;
 use App\Livewire\Admin\AccessLog;
 use App\Livewire\Admin\TrackingLog;
 use App\Livewire\Admin\EditUserForm;
+use App\Livewire\Admin\ChangePassword;
 use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');
     Route::get('admin/edit-user-form/{id}', EditUserForm::class)->name('editUserForm');
+    Route::get('admin/change-password/{id}', ChangePassword::class)->name('changePassword');
 
 });
