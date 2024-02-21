@@ -77,15 +77,32 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
                     <a>Login As: {{ Auth::guard('admin')->user()->username }}</a> <br>
-                    <a>{{ date('F j, Y, g:i a') }}</a>
+                    <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
+
         </div>
+        <script>
+            function updateDateTime() {
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                // This will format the date and time similar to PHP's date('F j, Y, g:i a')
+                const dateTimeStr = now.toLocaleDateString('en-US', options) + ', ' + now.toLocaleTimeString('en-US', options);
+                document.getElementById('dateTimeDisplay').innerText = dateTimeStr;
+            }
+
+            // Update the time every second
+            setInterval(updateDateTime, 1000);
+
+            // Also update the time immediately when the script loads
+            updateDateTime();
+            </script>
+
         <!-- Plus button for adding docs-->
         <div class="sidebar d-flex justify-content-center">
             <div class="mt-1 mb-3">
                 <div class="info">
-                    <a href="{{ route('add') }}" class="btn btn-block btn-secondary btn-lg d-block ">
+                    <a href="{{ route('add') }}" class="btn btn-block btn-outline-primary btn-lg">
                         <i class="fas fa-plus mr-1"></i>
                         <span class="d-none d-md-inline">Documents</span> <!-- Hide on small screens -->
                     </a>

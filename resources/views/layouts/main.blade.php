@@ -42,9 +42,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @livewireStyles
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="sidebar-mini" style="height: auto;">
 
-    @include('layouts.admin-app')
+
+@include('layouts.admin-app')
+
+
 
     <!-- REQUIRED SCRIPTS -->
 

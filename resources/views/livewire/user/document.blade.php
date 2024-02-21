@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="container my-3">
+    <div class="container-fluid">
         @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -27,25 +27,24 @@
                 </button>
             </div>
         @endif
-        @if ($showTable == true)
-            <div class="card my-2">
+
+            <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <h3>Document ( {{ $totalDocuments }} )</h3>
-                        <button class="btn btn-success" wire:click='showForm'>
-                            <span wire:loading.remove wire:target='showForm'>New</span>
-                            <span wire:loading wire:target='showForm'>New....</span>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Add Documents
                         </button>
                     </div>
                 </div>
             </div>
-        @endif
+
 
         @if ($showTable == true)
             <div class="card">
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-hover table-sm table-striped">
+                        <table class="table table-striped text-nowrap">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -54,8 +53,7 @@
                                     <th>Category</th>
                                     <th>Description</th>
                                     <th>Document</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,57 +87,58 @@
     </div>
 
 
-    @if ($createForm == true)
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Document</h3>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Document</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form wire:submit.prevent='create'>
+                        <div class="form-group">
+                            <label for="documentName">Document Name</label>
+                            <input type="text" wire:model='documentName' class="form-control" id="documentName">
+                            @error('documentName')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="card-body">
-                            <form wire:submit.prevent='create'>
-                                <div class="form-group">
-                                    <label for="documentName">Document Name</label>
-                                    <input type="text" wire:model='documentName' class="form-control"
-                                        id="documentName">
-                                    @error('documentName')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Category</label>
-                                    <input type="text" wire:model='category' class="form-control" id="category">
-                                    @error('category')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <input type="text" wire:model='description' class="form-control"
-                                        id="description">
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload Document</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" wire:model='document' class="custom-file-input" id="document">
-                                            <label class="custom-file-label" for="exampleInputFile2">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type='submit' class="btn btn-primary">Save</button>
-                            </form>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <input type="text" wire:model='category' class="form-control" id="category">
+                            @error('category')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" wire:model='description' class="form-control" id="description">
+                            @error('description')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Document</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" wire:model='document' class="custom-file-input" id="document">
+                                    <label class="custom-file-label" for="exampleInputFile2">Choose
+                                        file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type='submit' class="btn btn-primary">Submit</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
 
 
 

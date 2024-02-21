@@ -104,56 +104,5 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-
-
     </div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Create Document</h3>
-                        </div>
-                        <div class="card-body">
-                            <form wire:submit.prevent='create'>
-                                <div class="form-group">
-                                    <label for="documentName">Document Name</label>
-                                    <input type="text" wire:model='documentName' class="form-control"
-                                        id="documentName">
-                                    @error('documentName')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">Category</label>
-                                    <input type="text" wire:model='category' class="form-control" id="category">
-                                    @error('category')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <input type="text" wire:model='description' class="form-control"
-                                        id="description">
-                                    @error('description')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label>Upload Document</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" wire:model='document' class="custom-file-input" id="document">
-                                            <label class="custom-file-label" for="exampleInputFile2">Choose
-                                                file</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type='submit' class="btn btn-primary">Save</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 </div>

@@ -37,7 +37,7 @@ class Documents extends Component
     {
         $documents = ModelsDocument::orderBy('id', 'DESC')->where('user_id', Auth::user()->id)->paginate(4);
         $this->totalDocuments = ModelsDocument::count();
-        return view('livewire.user.document', compact('documents'))->layout('layouts.main');
+        return view('livewire.admin.documents', compact('documents'))->layout('layouts.main');
     }
 
     public function goBack()
