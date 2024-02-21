@@ -51,7 +51,13 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Office</label>
-                            <input type="text" class="form-control" placeholder="Enter ..." id="category2">
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                                </select>
                         </div>
                     </div>
                 </div>
@@ -59,21 +65,38 @@
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Category</label>
-                            <input type="text" class="form-control" placeholder="Enter ..." id="department2">
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                                </select>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Sub-Category</label>
-                            <input type="text" class="form-control" placeholder="Enter ..." id="department2">
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                                </select>
                         </div>
                     </div>
 
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Action</label>
-                            <input class="form-control" rows="3" placeholder="Enter ..."
-                                id="description2"></input>
+                            <select class="form-control">
+                                <option>option 1</option>
+                                <option>option 2</option>
+                                <option>option 3</option>
+                                <option>option 4</option>
+                                <option>option 5</option>
+                                </select>
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -86,12 +109,6 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label>Message</label>
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." id="description2"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
                             <label>Description</label>
                             <textarea class="form-control" rows="3" placeholder="Enter ..." id="description2"></textarea>
                         </div>
@@ -99,7 +116,7 @@
 
                 </div>
             </form>
-            <div class="text-right">
+            <div class="float-right">
                 <!-- Place the button inside this div for alignment -->
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

@@ -81,36 +81,20 @@
                 </div>
             </div>
 
-        </div>
-        <script>
-            function updateDateTime() {
-                const now = new Date();
-                const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-                // This will format the date and time similar to PHP's date('F j, Y, g:i a')
-                const dateTimeStr = now.toLocaleDateString('en-US', options) + ', ' + now.toLocaleTimeString('en-US', options);
-                document.getElementById('dateTimeDisplay').innerText = dateTimeStr;
-            }
 
-            // Update the time every second
-            setInterval(updateDateTime, 1000);
-
-            // Also update the time immediately when the script loads
-            updateDateTime();
-            </script>
-
-        <!-- Plus button for adding docs-->
-        <div class="sidebar d-flex justify-content-center">
-            <div class="mt-1 mb-3">
-                <div class="info">
-                    <a href="{{ route('add') }}" class="btn btn-block btn-outline-primary btn-lg">
-                        <i class="fas fa-plus mr-1"></i>
-                        <span class="d-none d-md-inline">Documents</span> <!-- Hide on small screens -->
-                    </a>
+            <!-- Plus button for adding docs-->
+            <div class="d-flex justify-content-center">
+                <div class="mt-1 mb-3">
+                    <div class="info">
+                        <a href="{{ route('add') }}" class="btn btn-block btn-outline-primary btn-lg">
+                            <i class="fas fa-plus mr-1"></i>
+                            <span class="d-none d-md-inline">Documents</span> <!-- Hide on small screens -->
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Sidebar -->
-        <div class="sidebar mt-1 pb-3 mb-3 ">
+            <!-- Sidebar -->
+
             <!-- SidebarSearch Form -->
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
@@ -131,8 +115,7 @@
                     <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{{ route('admin.admin-dashboard') }}"
-                            class="nav-link
-                    {{ $current_route == 'admin.admin-dashboard' ? 'active' : '' }}">
+                            class="nav-link {{ $current_route == 'admin.admin-dashboard' ? 'active' : '' }}">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Dashboard
@@ -147,11 +130,25 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
+                        <ul class="nav nav-treeview"
+                            style="display: {{ $current_route == 'admin.documents' ? 'block' : 'none' }};">
                             <li class="nav-item">
-                                <a href="{{ route('admin.documents') }}" class="nav-link {{ $current_route == 'admin.documents' ? 'active' : '' }}">
+                                <a href="{{ route('admin.documents') }}"
+                                    class="nav-link {{ $current_route == 'admin.documents' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Executive Order</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Administrative Order</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Memorandum Order</p>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -197,34 +194,20 @@
                                 </a>
                             </li>
                             <!-- Add other list items here -->
+                            <!-- Add other list items here -->
                         </ul>
                     </li>
 
                     <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const treeView = document.querySelector('.nav-treeview');
-                            const currentRoute = "{{ $current_route }}"; // Assuming $current_route is available from backend
-
-                            if (treeView && currentRoute === '/admin/documents') {
-                                treeView.style.display = 'block';
-                            } else {
-                                treeView.style.display = 'none';
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let activeSublist = document.querySelector(".nav.nav-treeview[style='display: block;']");
+                            if (activeSublist) {
+                                let parentNavItem = activeSublist.closest(".nav-item");
+                                parentNavItem.classList.add("menu-open");
                             }
                         });
                     </script>
 
-
-                    <!--Next Line of The Navbar-->
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('department') }}"
-                            class="nav-link
-                    {{ $current_route == 'department' ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-building"></i>
-                            <p>
-                                Offices
-                            </p>
-                        </a>
-                    </li> --}}
                     <li class="nav-item">
                         <a href="{{ route('TrackingLog') }}"
                             class="nav-link
@@ -257,11 +240,34 @@
                 </ul>
             </nav>
         </div>
+        <script>
+            function updateDateTime() {
+                const now = new Date();
+                const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                };
+                // This will format the date and time similar to PHP's date('F j, Y, g:i a')
+                const dateTimeStr = now.toLocaleDateString('en-US', options);
+                document.getElementById('dateTimeDisplay').innerText = dateTimeStr;
+            }
+
+            // Update the time every second
+            setInterval(updateDateTime, 1000);
+
+            // Also update the time immediately when the script loads
+            updateDateTime();
+        </script>
         <!-- Sidebar content -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="background-image: url('background image.png');">
+    <div class="content-wrapper">
         <div class="content">
             <div class="container-fluid">
                 <main>
@@ -275,6 +281,13 @@
 
 
     <!-- /.content-wrapper -->
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 1.0
+        </div>
+        <strong>Copyright © 2014 <a href="#">LGU Quezon</a>.</strong> All rights reserved.
+    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -285,18 +298,7 @@
         </div>
     </aside>
     <!-- /.control-sidebar -->
+    <div id="sidebar-overlay"></div>
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Version 1.0
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2024 <a href="#">LGU QUEZON</a>.</strong> All rights
-        reserved.
-    </footer>
-
-</div>
 </div>
 <!-- ./wrapper -->
