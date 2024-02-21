@@ -81,10 +81,19 @@
                 </div>
             </div>
         </div>
-
-
+        <!-- Plus button for adding docs-->
+        <div class="sidebar d-flex justify-content-center">
+            <div class="mt-1 mb-3">
+                <div class="info">
+                    <a href="{{ route('add') }}" class="btn btn-block btn-secondary btn-lg d-block ">
+                        <i class="fas fa-plus mr-1"></i>
+                        <span class="d-none d-md-inline">Documents</span> <!-- Hide on small screens -->
+                    </a>
+                </div>
+            </div>
+        </div>
         <!-- Sidebar -->
-        <div class="sidebar mt-3 pb-3 mb-3 ">
+        <div class="sidebar mt-1 pb-3 mb-3 ">
             <!-- SidebarSearch Form -->
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
@@ -121,9 +130,9 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: {{ $current_route == '/admin/documents' ? 'block' : 'none' }};">
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ route('admin.documents') }}" class="nav-link {{ $current_route == '/admin/documents' ? 'active' : '' }}">
+                                <a href="{{ route('admin.documents') }}" class="nav-link {{ $current_route == 'admin.documents' ? 'active' : '' }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Executive Order</p>
                                 </a>
@@ -173,15 +182,21 @@
                             <!-- Add other list items here -->
                         </ul>
                     </li>
+
                     <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            let activeSublist = document.querySelector(".nav.nav-treeview[style='display: block;']");
-                            if (activeSublist) {
-                                let parentNavItem = activeSublist.closest(".nav-item");
-                                parentNavItem.classList.add("menu-open");
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const treeView = document.querySelector('.nav-treeview');
+                            const currentRoute = "{{ $current_route }}"; // Assuming $current_route is available from backend
+
+                            if (treeView && currentRoute === '/admin/documents') {
+                                treeView.style.display = 'block';
+                            } else {
+                                treeView.style.display = 'none';
                             }
                         });
                     </script>
+
+
                     <!--Next Line of The Navbar-->
                     {{-- <li class="nav-item">
                         <a href="{{ route('department') }}"

@@ -12,6 +12,7 @@ use App\Livewire\Admin\AccessLog;
 use App\Livewire\Admin\TrackingLog;
 use App\Livewire\Admin\EditUserForm;
 use App\Livewire\User\Document;
+use App\Livewire\AddDocuments;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['web'])->group(function () {
     Route::get('user/register', Register::class)->name('user.register');
     Route::get('user/login', Login::class)->name('user.login');
+    Route::get('/add', AddDocuments::class)->name('add');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');

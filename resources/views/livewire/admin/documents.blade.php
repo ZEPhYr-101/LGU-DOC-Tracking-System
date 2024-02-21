@@ -1,6 +1,6 @@
 <div>
     <x-slot name="title">
-        Admin - Documents
+        Admin | Documents
     </x-slot>
     <div class="content-header">
         <div class="container-fluid">
@@ -64,7 +64,7 @@
                                  <input type="text" wire:model='description' class="form-control">
                         @error('title')
                             <span class="text-danger">{{ $message }}</span>
-                        
+
                                 <textarea type="text" wire:model='description' class="form-control" class="form-control" rows="3" placeholder="Enter ..." ></textarea>
                                 @enderror
                             </div>
@@ -127,7 +127,7 @@
                                     <h4>Document Not Found</h4>
                                 @endforelse
                             </tbody>
-                        
+
                         </table>
                         <div class="text-center">
                             {{ $documents->links('custom-pagination-links-view') }}

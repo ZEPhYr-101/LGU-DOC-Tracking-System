@@ -11,7 +11,7 @@
             <img src="{{ asset('images/Green Mint globalnet technology Logo (1).png') }}" alt="Doc Track img" style="max-width: 150%; max-height: 150%; " width="600" height="550" />
         </div>
         <div class="col" style="flex: 1; max-width: 50%;">
-                
+
                     <div class="card-header" style="background-color: white;">
                         <h3 class="text-center font-weight-light my-4">Login</h3>
                     </div>
@@ -56,8 +56,8 @@
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <div class="small">
-                            <a href="{{ route('user.register') }}">Need an account? Sign up!</a>
+                        <div class="small">Need an account?
+                            <a href="{{ route('user.register') }}"> Sign up!</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
         </div>
     </div>
     </div>
-</div> 
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous"></script>
