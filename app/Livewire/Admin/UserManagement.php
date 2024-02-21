@@ -46,5 +46,8 @@ class UserManagement extends Component
     {
         return redirect()->route('editUserForm', ['id' => $id]);
     }
-
+    public function changePassword($id)
+    {
+        return redirect()->route('changePassword', ['id' => $id]);
+    }
 }

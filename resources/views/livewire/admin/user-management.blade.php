@@ -86,6 +86,11 @@
                                                     <i class="fas fa-edit"></i>
                                                     Edit
                                                 </button>
+                                                <button wire:click='changePassword({{ $user->id }})' type="button"
+                                                    class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
