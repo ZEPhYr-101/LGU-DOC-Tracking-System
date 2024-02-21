@@ -1,4 +1,3 @@
-
 @php
     $current_route = request()->route()->getName();
 @endphp
@@ -44,10 +43,13 @@
                         data-slide="true" role="button">See All Notifications</a>
                 </div>
             </li>
-            <ul class="navbar-nav ml-auto mr-0 ml-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown user-menu show">
+                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('dist/img/LGU Quezon LOGO.png') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
+                    </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="#">Activity Log</a>
@@ -71,20 +73,18 @@
             </span>
         </a>
 
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{ asset('dist/img/LGU Quezon LOGO.png') }}" class="img-circle elevation-2"
-                        alt="User Image">
-                </div>
+        <div class="sidebar ">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
-                    <a href="#" class="d-block">{{ Auth::guard('admin')->user()->username }}</a>
+                    <a>Login As: {{ Auth::guard('admin')->user()->username }}</a> <br>
+                    <a>{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
+        </div>
 
+
+        <!-- Sidebar -->
+        <div class="sidebar mt-3 pb-3 mb-3 ">
             <!-- SidebarSearch Form -->
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
@@ -121,9 +121,17 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+<<<<<<< HEAD
+                        <ul class="nav nav-treeview"
+                            style="display: {{ $current_route == 'documents' ? 'block' : 'none' }};">
+                            <li class="nav-item">
+                                <a href="{{ route('documents') }}"
+                                    class="nav-link {{ $current_route == 'documents' ? 'active' : '' }}">
+=======
                         <ul class="nav nav-treeview" style="display: {{ $current_route == '/admin/documents' ? 'block' : 'none' }};">
                             <li class="nav-item">
                                 <a href="{{ route('admin.documents') }}" class="nav-link {{ $current_route == '/admin/documents' ? 'active' : '' }}">
+>>>>>>> 90c928d8591981e147744a276d01277eb2a65b7a
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Executive Order</p>
                                 </a>
@@ -213,7 +221,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('userManagement')}}" class="nav-link
+                        <a href="{{ route('userManagement') }}"
+                            class="nav-link
                         {{ $current_route == 'userManagement' ? 'active' : '' }}">
                             <i class="nav-icon fa fa-users"></i>
                             <p>
@@ -222,11 +231,9 @@
                         </a>
                     </li>
                 </ul>
-
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
+        <!-- Sidebar content -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
