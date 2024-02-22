@@ -57,7 +57,7 @@
                                     <th style="width: 10px">#</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Department</th>
+                                    <th>Office</th>
                                     <th>Status</th>
                                     <th style="width: 40px">Actions</th>
                                 </tr>
