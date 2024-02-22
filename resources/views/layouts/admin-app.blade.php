@@ -24,36 +24,22 @@
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <span class="dropdown-header">15 Notifications</span>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
+                    <div class="mt-4 pb-4 d-flex justify-content-center">
+                        <span>No Notification Found</span>
+                    </div>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer" data-widget="control-sidebar"
                         data-slide="true" role="button">See All Notifications</a>
                 </div>
             </li>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown user-menu show">
+                <li class="nav-item user-menu show">
                     <a href="#" class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="{{ asset('dist/img/LGU Quezon LOGO.png') }}" class="user-image img-circle elevation-2"
                             alt="User Image">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Settings</a>
-                        <a class="dropdown-item" href="#">Activity Log</a>
-                        <div class="dropdown-divider"></div>
                         @livewire('admin.logout')
                     </div>
                 </li>
@@ -84,11 +70,11 @@
 
             <!-- Plus button for adding docs-->
             <div class="d-flex justify-content-center">
-                <div class="mt-1 mb-3">
+                <div class="mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a href="{{ route('add') }}" class="btn btn-block btn-outline-primary btn-lg">
+                        <a href="{{ route('add') }}" class="btn rounded-pill btn-outline-primary btn-lg">
                             <i class="fas fa-plus mr-1"></i>
-                            <span class="d-none d-md-inline">Documents</span> <!-- Hide on small screens -->
+                            <p class="d-none d-md-inline">Documents</p> <!-- Hide on small screens -->
                         </a>
                     </div>
                 </div>

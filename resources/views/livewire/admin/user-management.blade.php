@@ -1,6 +1,6 @@
 <div>
     <x-slot name="title">
-        Admin - User Management
+        Admin | User Management
     </x-slot>
 
     <div class="content-header">
@@ -41,7 +41,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3>Document {{ $totalUser }} </h3>
+                    <h3>TOTAL USERS: {{ $totalUser }} </h3>
                 </div>
             </div>
         </div>
@@ -104,7 +104,6 @@
                                 @endforelse
                             </tbody>
                         </table>
-
                     </div>
                     <div class="card-footer clearfix">
                         <ul class="pagination pagination-sm m-0 float-right">
