@@ -57,6 +57,7 @@
                         <table class="table table-striped text-nowrap">
                             <thead>
                                 <tr>
+                                    <th>User</th>
                                     <th>Document Name</th>
                                     <th>Category</th>
                                     <th>Description</th>
@@ -66,6 +67,10 @@
                             <tbody>
                                 @foreach ($documents as $document)
                                     <tr>
+                                        @php
+                                            $admin = $admins->where('id', $document->user_id)->first();
+                                        @endphp
+                                        <td>{{ optional($admin)->username }}</td>
                                         <td>{{ $document->documentName }}</td>
                                         <td>{{ $document->category }}</td>
                                         <td>{{ $document->description }}</td>
@@ -73,6 +78,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     </div>
                     <div class="card-footer clearfix">

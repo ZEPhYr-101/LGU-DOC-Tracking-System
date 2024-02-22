@@ -44,7 +44,7 @@ class UploadDucuments extends Component
     if ($filename) {
         $document = new Document();
         $document->documentName = $this->documentName;
-        $document->user_id = Auth::user()->id;
+        $document->user_id = Auth::user()->user_id_no;
         $document->category = $category;
         $document->description = $this->description;
         $document->document = $filename;
