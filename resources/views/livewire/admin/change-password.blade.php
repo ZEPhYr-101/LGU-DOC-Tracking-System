@@ -32,16 +32,24 @@
                     });
                 </script>
             @endif
-
+            @if (session()->has('error'))
+            <script>
+                document.addEventListener('livewire:load', function() {
+                    window.livewire.on('showErrorMessage', function(message) {
+                        toastr.error(message);
+                    });
+                });
+            </script>
+        @endif
                     <form wire:submit.prevent="update">
                         <div class="form-group">
                             <label for="name">Password: </label>
-                            <input type="text" wire:model="password" class="form-control" id="password" type="password"
+                            <input wire:model="password" class="form-control" id="password" type="password"
                                 placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="name">Confirm Password: </label>
-                            <input type="text" wire:model="cpassword" class="form-control" id="c_password" type="password"
+                            <input wire:model="c_password" class="form-control" type="password"
                                 placeholder="">
                         </div>
                         

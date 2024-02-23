@@ -5,6 +5,7 @@ namespace App\Livewire\Admin;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Validation\Rule;
 
 class ChangePassword extends Component
 {
@@ -25,6 +26,7 @@ class ChangePassword extends Component
 
     public $id;
     public $password;
+    public $c_password;
    
     public $changePasswordVisible = false;
 
@@ -42,13 +44,17 @@ class ChangePassword extends Component
 
     public function update()
 {
-    $rules = [];
+    $rules = [
+        'password' => 'string|unique:users,password,' . $this->id,
+    ];
 
     if (!empty($this->password)) {
-        $rules['password'] = 'string|unique:users,password,' . $this->id;
+        $rules['c_password'] = 'required|string|same:password';
     }
 
-    $validatedData = $this->validate($rules);
+    $validatedData = $this->validate($rules, [
+        'c_password.same' => 'The confirmation password must match the password.',
+    ]);
 
     try {
         // Find the user by ID and update the fields
@@ -64,11 +70,9 @@ class ChangePassword extends Component
             session()->flash('success', 'Password updated successfully!');
             $this->redirect('/admin/user-management', 'showSuccessMessage');
         }
-        // Emit an event to hide the edit user form
-        // Redirect to the user-management route
-        //return redirect()->route('user-management', 'showSuccessMesssage');
     } catch (\Exception $e) {
         session()->flash('error', 'Error updating password: ' . $e->getMessage());
+        $this->redirect('/admin/user-management', 'showErrorMessage');
     }
 }
 
