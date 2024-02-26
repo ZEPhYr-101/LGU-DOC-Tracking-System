@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class ChangePassword extends Component
 {
@@ -42,7 +43,7 @@ class ChangePassword extends Component
         $this->emit('showChangePassword'); // Emit an event to show the edit user form
     }
 
-    public function update()
+    public function updatePassword()
 {
     $rules = [
         'password' => 'string|unique:users,password,' . $this->id,
@@ -52,27 +53,30 @@ class ChangePassword extends Component
         $rules['c_password'] = 'required|string|same:password';
     }
 
-    $validatedData = $this->validate($rules, [
-        'c_password.same' => 'The confirmation password must match the password.',
-    ]);
-
+   
     try {
+        // Validate the request data
+        $validatedData = $this->validate($rules, [
+            'c_password' => 'password do not match',
+        ], [
+            'c_password.same' => 'Error updating password: The password confirmation does not match.',
+        ]);
+    
         // Find the user by ID and update the fields
         $user = User::findOrFail($this->id);
-
+    
         // Update the fields individually only if they are present in the request
         if (isset($validatedData['password'])) {
             $user->password = $validatedData['password'];
         }
-
+    
         $result = $user->save();
         if ($result) {
             session()->flash('success', 'Password updated successfully!');
             $this->redirect('/admin/user-management', 'showSuccessMessage');
         }
-    } catch (\Exception $e) {
-        session()->flash('error', 'Error updating password: ' . $e->getMessage());
-        $this->redirect('/admin/user-management', 'showErrorMessage');
+    } catch (ValidationException $e) {
+        session()->flash('error', $e->getMessage(), $this->redirect('/admin/user-management', 'showErrorMessage'));
     }
 }
 
