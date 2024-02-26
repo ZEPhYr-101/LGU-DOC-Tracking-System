@@ -57,7 +57,7 @@ class ChangePassword extends Component
     try {
         // Validate the request data
         $validatedData = $this->validate($rules, [
-            'c_password' => 'password do not match',
+            'c_password' => 'passwords do not match',
         ], [
             'c_password.same' => 'Error updating password: The password confirmation does not match.',
         ]);
