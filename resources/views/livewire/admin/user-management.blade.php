@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="card">
-            
+
 
 
             <div class="row">
@@ -58,6 +58,7 @@
                                     <th style="width: 10px">#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>ID No.</th>
                                     <th>Office</th>
                                     <th>Status</th>
                                     <th style="width: 40px">Actions</th>
@@ -66,9 +67,10 @@
                             <tbody>
                                 @forelse ($users as $user)
                                     <tr>
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $user->fname . ' ' . $user->lname }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->user_id_no }}</td>
                                         <td>{{ $user->dept }}</td>
                                         <td>
                                             @if ($user->is_Accepted == 1)

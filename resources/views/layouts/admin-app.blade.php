@@ -108,7 +108,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="documentsMenu">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-book"></i>
                             <p>
@@ -116,83 +116,26 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
-                        <ul class="nav nav-treeview"
-                            style="display: {{ $current_route == 'admin.documents' ? 'block' : 'none' }};">
-                            <li class="nav-item">
-                                <a href="{{ route('admin.documents') }}"
-                                    class="nav-link {{ $current_route == 'admin.documents' ? 'active' : '' }}">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Executive Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Administrative Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Memorandum Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Administrative Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Memorandum Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Office Memorandum</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Office Order</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Resolutions</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Ordinances</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Other Documents</p>
-                                </a>
-                            </li>
-                            <!-- Add other list items here -->
-                            <!-- Add other list items here -->
-                        </ul>
+                        @livewire('categories-dropdown')
                     </li>
 
                     <script>
-                        document.addEventListener("DOMContentLoaded", function() {
-                            let activeSublist = document.querySelector(".nav.nav-treeview[style='display: block;']");
-                            if (activeSublist) {
-                                let parentNavItem = activeSublist.closest(".nav-item");
-                                parentNavItem.classList.add("menu-open");
-                            }
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const documentsMenu = document.getElementById('documentsMenu');
+                        const isMenuOpen = localStorage.getItem('documentsMenuOpen');
+
+                        if (isMenuOpen === 'true') {
+                            documentsMenu.classList.add('menu-open');
+                        }
+
+                        documentsMenu.addEventListener('click', function() {
+                            const isOpen = documentsMenu.classList.contains('menu-open');
+                            localStorage.setItem('documentsMenuOpen', isOpen ? 'false' : 'true');
                         });
+                    });
                     </script>
+
+
 
                     <li class="nav-item">
                         <a href="{{ route('TrackingLog') }}"

@@ -7,6 +7,7 @@ use App\Models\Document;
 use Livewire\Component;
 use App\Models\User;
 
+
 class Documents extends Component
 {
     public $documents;
@@ -16,7 +17,7 @@ class Documents extends Component
 
     public function mount()
     {
-        $this->documents = Document::all();
+        $this->documents = Document::orderByDesc('created_at')->get();
         $this->users = User::all();
         $this->admins = Admin::all();
     }

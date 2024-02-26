@@ -25,50 +25,58 @@ class UploadDucuments extends Component
     ];
 
     public function create()
-{
-    $this->validate([
-        'documentName' => 'required',
-        'document' => 'required|file',
-        'category' => 'required',
-        'description' => 'required',
-    ]);
+    {
+        $this->validate([
+            'documentName' => 'required',
+            'document' => 'required|file',
+            'category' => 'required',
+            'description' => 'required',
+        ]);
 
-    $category = $this->category;
+        $category = $this->category;
 
-    // Sanitize the category name (replace spaces with underscores)
-    $category = str_replace(' ', '_', $category);
+        // Sanitize the category name (replace spaces with underscores)
+        $category = str_replace(' ', '_', $category);
 
-    // Store the file in the category folder
-    $filename = $this->document->store('documents/' . $category, 'public');
+        // Check if the folder exists, if not, create it
+        $folderPath = 'documents/' . $category;
+        if (!Storage::exists($folderPath)) {
+            Storage::makeDirectory($folderPath, 0755, true); // Recursive directory creation
+        }
 
-    if ($filename) {
-        $document = new Document();
-        $document->documentName = $this->documentName;
-        $document->user_id = Auth::user()->user_id_no;
-        $document->category = $category;
-        $document->description = $this->description;
-        $document->document = $filename;
+        // Store the file in the category folder
+        $filename = $this->document->store($folderPath, 'public');
 
-        $document->save();
+        if ($filename) {
+            $document = new Document();
+            $document->documentName = $this->documentName;
+            $document->user_id = Auth::user()->user_id_no;
+            $document->category = $category;
+            $document->description = $this->description;
+            $document->document = $filename;
+            $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
 
-        // Get the full path of the stored document
-        $documentPath = Storage::url($filename);
+            $document->save();
 
-        session()->flash('success', 'Document uploaded successfully');
-        session()->flash('document_path', $documentPath); // Store the document path in session
+            // Get the full path of the stored document
+            $documentPath = Storage::url($filename);
 
-        // Reset form fields
-        $this->reset();
+            session()->flash('success', 'Document uploaded successfully');
+            session()->flash('document_path', $documentPath); // Store the document path in session
 
-        // Close the modal after successful submission
+            // Reset form fields
+            $this->reset();
 
-        // Redirect to the documents page
-        $this->redirect('documents');
-    } else {
-        // Handle the case where file upload failed
-        session()->flash('error', 'Failed to upload document. Please try again.');
+            // Close the modal after successful submission
+
+            // Redirect to the documents page
+            $this->redirect('documents');
+        } else {
+            // Handle the case where file upload failed
+            session()->flash('error', 'Failed to upload document. Please try again.');
+        }
     }
-}
+
 
     public function render()
     {

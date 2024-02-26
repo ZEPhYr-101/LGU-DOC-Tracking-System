@@ -57,10 +57,12 @@
                         <table class="table table-striped text-nowrap">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>User</th>
                                     <th>Document Name</th>
                                     <th>Category</th>
                                     <th>Description</th>
+                                    <th>Tracking No.</th>
                                     <th>Download</th>
                                 </tr>
                             </thead>
@@ -68,12 +70,14 @@
                                 @foreach ($documents as $document)
                                     <tr>
                                         @php
-                                            $admin = $admins->where('id', $document->user_id)->first();
+                                            $admin = $admins->where('user_id_no', $document->user_id)->first();
                                         @endphp
-                                        <td>{{ optional($admin)->username }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ optional($admin)->username}}</td>
                                         <td>{{ $document->documentName }}</td>
                                         <td>{{ $document->category }}</td>
                                         <td>{{ $document->description }}</td>
+                                        <td>{{ $document->doc_tracking_code }}</td>
                                         <td><a href="{{ Storage::url($document->document) }}" target="_blank">Download</a></td>
                                     </tr>
                                 @endforeach

@@ -33,6 +33,7 @@ class Register extends Component
         $users->email = $this->email;
         $users->password = Hash::make($this->password);
         $users->dept = $this->dept;
+        $users->user_id_no = "USER-" . mt_rand(1000000000000, 9999999999999);
         $users->is_Accepted = 0;
 
         $result = $users->save();
@@ -42,7 +43,6 @@ class Register extends Component
             $this->lname = '';
             $this->email = '';
             $this->password = '';
-            $this->c_password = '';
             $this->dept = '';
             return redirect(route('user.login'));
         }
