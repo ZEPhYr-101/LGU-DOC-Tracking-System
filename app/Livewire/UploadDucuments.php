@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -14,65 +15,73 @@ class UploadDucuments extends Component
 
     public $documentName;
     public $category;
+
+    public $route;
     public $description;
     public $document;
 
+    public $categories;
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+        $this->route = url()->previous();
+    }
+
+
     protected $rules = [
         'documentName' => 'required',
-        'document' => 'required|file',
         'category' => 'required',
         'description' => 'required',
+        'document' => 'required|file|mimes:doc,docx,pdf,txt,rtf,odt,xls,xlsx,csv,jpg,jpeg,png,gif,bmp,svg,ppt,pptx',
     ];
 
     public function create()
     {
-        $this->validate([
-            'documentName' => 'required',
-            'document' => 'required|file',
-            'category' => 'required',
-            'description' => 'required',
+        $validatedData = $this->validate([
+            'document' => $this->rules['document'], // Validating 'document' separately
+        ], [
+            'document.required' => 'Please select a document to upload.',
+            'document.file' => 'The uploaded file is not valid.',
+            'document.mimes' => 'Only .doc, .docx, .pdf, .txt, .rtf, .odt, .xls, .xlsx, .csv, .jpg, .jpeg, .png, .gif, .bmp, .svg, .ppt, .pptx files are allowed.',
         ]);
 
-        $category = $this->category;
+        $categoryId = $this->category;
 
-        // Sanitize the category name (replace spaces with underscores)
-        $category = str_replace(' ', '_', $category);
+        $category = Category::findOrFail($categoryId);
 
-        // Check if the folder exists, if not, create it
-        $folderPath = 'documents/' . $category;
+        $folderName = str_replace(' ', '_', $category->category_name);
+
+        $folderPath = 'documents/' . $folderName;
+
         if (!Storage::exists($folderPath)) {
-            Storage::makeDirectory($folderPath, 0755, true); // Recursive directory creation
+            Storage::makeDirectory($folderPath, 0755, true);
         }
 
-        // Store the file in the category folder
-        $filename = $this->document->store($folderPath, 'public');
+        $filename = $validatedData['document']->store($folderPath, 'public');
 
         if ($filename) {
             $document = new Document();
             $document->documentName = $this->documentName;
             $document->user_id = Auth::user()->user_id_no;
-            $document->category = $category;
+            $document->category = $categoryId;
             $document->description = $this->description;
             $document->document = $filename;
             $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
-
             $document->save();
 
-            // Get the full path of the stored document
             $documentPath = Storage::url($filename);
 
             session()->flash('success', 'Document uploaded successfully');
-            session()->flash('document_path', $documentPath); // Store the document path in session
+            session()->flash('document_path', $documentPath);
 
-            // Reset form fields
             $this->reset();
 
-            // Close the modal after successful submission
+            $categoryId = request()->query('id');
 
-            // Redirect to the documents page
-            $this->redirect('documents');
+            $redirectUrl = '/admin/documents?id=' . $categoryId;
+            return redirect()->to($redirectUrl); // Use redirect() helper
         } else {
-            // Handle the case where file upload failed
             session()->flash('error', 'Failed to upload document. Please try again.');
         }
     }
@@ -80,6 +89,6 @@ class UploadDucuments extends Component
 
     public function render()
     {
-        return view('livewire.upload-ducuments');
+        return view('livewire.upload-ducuments')->layout('layouts.main');
     }
 }

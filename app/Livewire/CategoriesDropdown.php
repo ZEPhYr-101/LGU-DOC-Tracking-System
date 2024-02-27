@@ -21,6 +21,6 @@ class CategoriesDropdown extends Component
 
     public function render()
     {
-        return view('livewire.categories-dropdown');
+        return view('livewire.categories-dropdown')->layout('layouts.main');
     }
 }

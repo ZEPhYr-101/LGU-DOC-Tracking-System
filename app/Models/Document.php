@@ -15,4 +15,9 @@ class Document extends Model
     {
         return $this->belongsToMany(User::class, 'user_id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

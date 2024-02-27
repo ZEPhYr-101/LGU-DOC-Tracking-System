@@ -49,8 +49,6 @@
             </div>
         </div>
         <div class="card">
-
-
             <div class="row">
                 <div class="col-12">
                     <div class="card-body table-responsive p-0">
@@ -67,20 +65,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($documents as $document)
+                                @forelse ($documents as $document)
                                     <tr>
                                         @php
                                             $admin = $admins->where('user_id_no', $document->user_id)->first();
                                         @endphp
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ optional($admin)->username}}</td>
+                                        <td>{{ optional($admin)->username }}</td>
                                         <td>{{ $document->documentName }}</td>
-                                        <td>{{ $document->category }}</td>
+                                        <td>
+                                            @foreach ($categories as $category)
+                                                @if ($category->id == $document->category)
+                                                    {{ $category->category_name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+
                                         <td>{{ $document->description }}</td>
                                         <td>{{ $document->doc_tracking_code }}</td>
-                                        <td><a href="{{ Storage::url($document->document) }}" target="_blank">Download</a></td>
+                                        <td><a href="{{ Storage::url($document->document) }}"
+                                                target="_blank">Download</a></td>
                                     </tr>
-                                @endforeach
+
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">No documents found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
 
                         </table>

@@ -106,7 +106,7 @@
     @livewireStyles
 </head>
 
-<body class="sidebar-mini" style="height: auto;">
+<body class="sidebar-mini layout-fixed" style="height: auto;">
 
 
     @include('layouts.admin-app')
@@ -117,6 +117,10 @@
 
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+    <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+    <script src="{{ asset('dist/js/pages/dashboard3.js') }}"></script>
 
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -132,21 +136,17 @@
 
     <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
-    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
+    <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.6.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- AdminLTE App -->
 
     @livewireScripts
     <script>
@@ -161,6 +161,11 @@
         @if (session('warning'))
             toastr.warning('{{ session('warning') }}');
         @endif
+    </script>
+    <script>
+        $(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 

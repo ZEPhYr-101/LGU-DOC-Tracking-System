@@ -10,7 +10,8 @@
         <!-- Top navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
+            </li>
         </ul>
 
         <!-- Right navbar links -->
@@ -49,17 +50,18 @@
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link" style="display: flex; align-items: center;">
             <img src="{{ asset('dist/img/LGU Quezon LOGO.png') }}" alt="AdminLTE Logo"
-                class="brand-image img-circle elevation-3" style="opacity: .8; margin-right: 5px;">
-            <span class="brand-text font-weight-light" style="font-size: 12px; text-align: center;">
-                LGU QUEZON DOCUMENT TRACKING <br> & <br> MANAGEMENT SYSTEM
-            </span>
+                class="brand-image img-circle elevation-3" style="opacity: .8; margin-right: 1px;">
+            <p class="brand-text font-weight-light" style="font-size: 12px; text-align: center;">
+                LGU QUEZON DOCUMENT TRACKING <br>&<br>MANAGEMENT SYSTEM
+            </p>
         </a>
 
-        <div class="sidebar ">
+        <div
+            class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
                     <a>Login As: {{ Auth::guard('admin')->user()->username }}</a> <br>
@@ -74,7 +76,7 @@
                     <div class="info">
                         <a href="{{ route('add') }}" class="btn rounded-pill btn-outline-primary btn-lg">
                             <i class="fas fa-plus mr-1"></i>
-                            <p class="d-none d-md-inline">Documents</p> <!-- Hide on small screens -->
+                            <p class="d-none d-md-inline">Compose</p> <!-- Hide on small screens -->
                         </a>
                     </div>
                 </div>
@@ -108,18 +110,9 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item" id="documentsMenu">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fa fa-book"></i>
-                            <p>
-                                Documents
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        @livewire('categories-dropdown')
-                    </li>
+                    @livewire('categories-dropdown')
 
-                    <script>
+                    {{-- <script>
                     document.addEventListener("DOMContentLoaded", function() {
                         const documentsMenu = document.getElementById('documentsMenu');
                         const isMenuOpen = localStorage.getItem('documentsMenuOpen');
@@ -133,7 +126,7 @@
                             localStorage.setItem('documentsMenuOpen', isOpen ? 'false' : 'true');
                         });
                     });
-                    </script>
+                    </script> --}}
 
 
 
@@ -192,6 +185,7 @@
             // Also update the time immediately when the script loads
             updateDateTime();
         </script>
+
         <!-- Sidebar content -->
     </aside>
 
