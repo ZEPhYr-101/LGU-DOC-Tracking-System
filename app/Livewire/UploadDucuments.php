@@ -18,11 +18,9 @@ class UploadDucuments extends Component
     public $description;
     public $document;
     public $categories;
-    public $route;
     public function mount()
     {
         $this->categories = Category::all();
-        $this->route = url()->previous();
     }
 
     public function create()
@@ -44,13 +42,13 @@ class UploadDucuments extends Component
             Storage::makeDirectory($folderPath, 0755, true);
         }
 
-        $filename = $this->document->store($folderPath, 'public');
+        $filename = $validatedData['document']->store($folderPath, 'public');
 
         if ($filename) {
             $document = new Document();
             $document->documentName = $validatedData['documentName'];
-            $document->user_id = Auth::user()->user_id_no;
-            $document->category = $validatedData['category'];
+            $document->user_id = Auth::guard('admin')->user()->user_id_no;
+            $document->category_id = $validatedData['category'];
             $document->description = $validatedData['description'];
             $document->document = $filename;
             $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
@@ -66,9 +64,8 @@ class UploadDucuments extends Component
             session()->flash('error', 'Failed to upload document. Please try again.');
         }
 
-        $this->redirect('documents');
+        return redirect()->route('alldocuments');
     }
-
     public function render()
     {
         return view('livewire.upload-ducuments')->layout('layouts.main');

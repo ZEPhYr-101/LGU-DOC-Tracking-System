@@ -27,7 +27,6 @@ class UserManagement extends Component
 
         $users = $usersQuery->paginate(10);
         $totalUser = User::count();
-
         return view('livewire.admin.user-management', compact('users', 'totalUser'))->layout('layouts.main');
 
     }

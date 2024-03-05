@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Request;
 class AllDocuments extends Component
 {
     use WithPagination;
-    public $documents;
     public $users;
     public $categories;
     public $admins;
@@ -21,13 +20,14 @@ class AllDocuments extends Component
 
     public function mount()
     {
-        $this->documents = Document::all();
+
         $this->categories = Category::all();
         $this->users = User::all();
         $this->admins = Admin::all();
     }
     public function render()
     {
-        return view('livewire.all-documents')->layout('layouts.main');
+        $documents = Document::where('documentName', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
+        return view('livewire.all-documents', ['documents' => $documents])->layout('layouts.main');
     }
 }

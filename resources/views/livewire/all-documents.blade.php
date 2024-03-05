@@ -57,7 +57,7 @@
                         <div class="row justify-content-between align-items-center"> <!-- Adding justify-content-between to space items apart -->
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 200px;">
-                                    <input type="text" wire:model.live="search" name="table_search" class="form-control float-right" placeholder="Search">
+                                    <input type="search" wire:model.live="search" name="table_search" class="form-control float-right" placeholder="Search">
                                 </div>
                             </div>
                             <div class="card-tools">
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    <div class="card-body table-responsive p-0" style="height: 650px;">
+                    <div class="card-body table-responsive p-0">
                         <table class="table table-head-fixed table-striped text-nowrap">
                             <thead>
                                 <tr>
@@ -116,12 +116,13 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="card-footer clearfix">
+                        <ul class="pagination pagination-sm m-0 float-right">
+                            {{ $documents->links('custom-pagination-links-view') }}
+                        </ul>
+                    </div>
                 </div>
-                {{-- <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        {{ $documents->links('custom-pagination-links-view') }}
-                    </ul>
-                </div> --}}
+
             </div>
         </div>
     </div>

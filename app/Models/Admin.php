@@ -12,6 +12,8 @@ class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $filable = ['username', 'user_id_no','password'];
+
     /**
      * The attributes that are mass assignable.
      *
