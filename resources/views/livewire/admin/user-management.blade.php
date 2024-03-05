@@ -48,6 +48,14 @@
         <div class="card">
             <div class="row">
                 <div class="col-12">
+                    <div class="card-header">
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 250px;">
+                                <input type="text" wire:model.live="search" name="table_search"
+                                    class="form-control float-right" placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body table-responsive p-0">
                         <table class="table table-striped text-nowrap">
                             <thead>

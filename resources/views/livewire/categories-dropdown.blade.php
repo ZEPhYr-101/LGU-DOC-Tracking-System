@@ -13,6 +13,7 @@
     </a>
     <ul class="nav nav-treeview">
         <!-- Loop through categories -->
+        
         @foreach ($categories as $category)
             @php
                 $isActive = $current_route === 'admin.documents' && $current_category_id == $category->id;

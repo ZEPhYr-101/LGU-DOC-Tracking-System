@@ -14,6 +14,7 @@ use App\Livewire\Admin\EditUserForm;
 use App\Livewire\Admin\ChangePassword;
 use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
+use App\Livewire\AllDocuments;
 use App\Livewire\CategoriesDropdown;
 use App\Livewire\UploadDucuments;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('user/login', Login::class)->name('user.login');
     Route::get('/add', AddDocuments::class)->name('add');
     Route::get('/uploadDocuments', UploadDucuments::class)->name('uploadDocuments');
+    Route::get('/alldocuments', AllDocuments::class)->name('alldocuments');
 
 });
 Route::middleware(['auth'])->group(function () {

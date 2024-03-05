@@ -110,6 +110,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('alldocuments') }}"
+                            class="nav-link
+                    {{ $current_route == 'alldocuments' ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>All Documents</p>
+                        </a>
+                    </li>
                     @livewire('categories-dropdown')
 
                     {{-- <script>

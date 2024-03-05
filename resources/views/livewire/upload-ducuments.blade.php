@@ -1,4 +1,4 @@
-<form wire:submit="create">
+<form wire:submit.prevent="create">
     <div class="form-group">
         <label for="documentName">Document Name</label>
         <input type="text" class="form-control" id="documentName" wire:model.defer="documentName">
@@ -30,9 +30,9 @@
     <div class="form-group">
         <label for="document">Document</label>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="document" id="document" wire:model="document"
+            <input type="file" name="document" id="document" wire:model.defer="document"
                 accept="image/*, .doc, .docx, .pdf, .txt, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, text/plain">
-            <label class="custom-file-label"  id="documentLabel" for="documentInput">Choose file</label>
+
         </div>
         @error('document')
             <span class="text-danger">{{ $message }}</span>
@@ -40,14 +40,3 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-@push('scripts')
-<script>
-    document.getElementById('documentInput').addEventListener('change', function (event) {
-        var input = event.target;
-        var label = input.nextElementSibling;
-        var fileName = input.files[0].name;
-        label.innerText = fileName;
-    });
-</script>
-@endpush

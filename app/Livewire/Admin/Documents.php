@@ -7,35 +7,47 @@ use App\Models\Category;
 use App\Models\Document;
 use Livewire\Component;
 use App\Models\User;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Request;
-
 
 class Documents extends Component
 {
+    use WithPagination;
     public $documents;
     public $users;
-
     public $categories;
-
     public $admins;
+    public $search = '';
+    // Pagination
+    protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {
-        $id = Request::input('id'); // Get the ID from the request
-
-        if ($id) {
-            // If ID is provided, filter documents by ID
-            $this->documents = Document::where('category', $id)->orderByDesc('created_at')->get();
-        } else {
-            // If ID is not provided, retrieve all documents
-            $this->documents = Document::orderByDesc('created_at')->get();
-        }
-        $this->categories= Category::all();
+        $this->categories = Category::all();
         $this->users = User::all();
         $this->admins = Admin::all();
     }
+
     public function render()
     {
+        $id = Request::input('id');
+        $query = Document::query(); // Start with a base query
+
+        if ($id) {
+            $query->where('category_id', $id); // Filter by category ID if provided
+        }
+
+        if ($this->search !== '') {
+            // Add search filtering if a search term is present
+            $query->where(function ($query) {
+                $query->where('documentName', 'like', '%' . $this->search . '%')
+                    ->orWhere('doc_tracking_code', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        $this->documents = $query->orderByDesc('id')->get();
+
+
         return view('livewire.admin.documents')->layout('layouts.main');
     }
 }

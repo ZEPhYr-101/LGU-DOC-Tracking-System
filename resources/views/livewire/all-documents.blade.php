@@ -54,13 +54,24 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-header">
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 250px;">
-                                <input type="text" wire:model.live="search" name="table_search"
-                                    class="form-control float-right" placeholder="Search">
+                        <div class="row justify-content-between align-items-center"> <!-- Adding justify-content-between to space items apart -->
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" wire:model.live="search" name="table_search" class="form-control float-right" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 250px">
+                                    <select class="form-control">
+                                        @foreach ($categories as $category)
+                                        <option>{{$category->category_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body table-responsive p-0" style="height: 650px;">
                         <table class="table table-head-fixed table-striped text-nowrap">
                             <thead>

@@ -11,14 +11,24 @@ class UserManagement extends Component
     use WithPagination;
 
     public $totalUser;
+    public $search = '';
 
     protected $paginationTheme = 'bootstrap';
 
     public function render()
     {
-        $users = User::orderBy('id', 'DESC')->paginate(10);
-        $this->totalUser = User::count();
-        return view('livewire.admin.user-management', compact('users'))->layout('layouts.main');
+        $usersQuery = User::orderBy('id', 'DESC');
+
+        if (!empty($this->search)) {
+            $usersQuery->where('fname', 'like', '%' . $this->search . '%')
+                       ->orWhere('lname', 'like', '%' . $this->search . '%')
+                       ->orWhere('user_id_no', 'like', '%'. $this->search. '%');
+        }
+
+        $users = $usersQuery->paginate(10);
+        $totalUser = User::count();
+
+        return view('livewire.admin.user-management', compact('users', 'totalUser'))->layout('layouts.main');
 
     }
 
