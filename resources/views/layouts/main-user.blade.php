@@ -108,7 +108,7 @@
 
 <body class="sidebar-mini layout-fixed  layout-footer-fixed" style="height: auto;">
 
-    @include('layouts.admin-app')
+    @include('layouts.user-app')
 
     <!-- REQUIRED SCRIPTS -->
 

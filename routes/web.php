@@ -15,7 +15,6 @@ use App\Livewire\Admin\ChangePassword;
 use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
 use App\Livewire\AllDocuments;
-use App\Livewire\CategoriesDropdown;
 use App\Livewire\UploadDucuments;
 use Illuminate\Support\Facades\Route;
 
@@ -54,4 +53,5 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');
     Route::get('admin/edit-user-form/{id}', EditUserForm::class)->name('editUserForm');
     Route::get('admin/documents', Documents::class)->name('admin.documents');
+    Route::get('admin/change-password/{id}', ChangePassword::class)->name('admin.changePassword');
 });

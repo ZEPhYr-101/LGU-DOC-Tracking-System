@@ -57,6 +57,6 @@ class UserManagement extends Component
     }
     public function changePassword($id)
     {
-        return redirect()->route('changePassword', ['id' => $id]);
+        return redirect()->route('admin.changePassword', ['id' => $id]);
     }
 }
