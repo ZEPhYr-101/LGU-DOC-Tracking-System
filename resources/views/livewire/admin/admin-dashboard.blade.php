@@ -34,10 +34,10 @@
 
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-success">
+                <div class="small-box" style="background-color: #FF7F50;">
                     <div class="inner">
                         <h3>53<sup style="font-size: 20px">%</sup></h3>
-                        <p>DEPARTMENT</p>
+                        <p>INCOMING</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -51,7 +51,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>44</h3>
-                        <p>TRACKING LOGS</p>
+                        <p>OUTGOING</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
@@ -62,10 +62,10 @@
 
             <div class="col-lg-3 col-6">
 
-                <div class="small-box bg-danger">
+                <div class="small-box bg-success">
                     <div class="inner">
                         <h3>65</h3>
-                        <p>ACCESS LOGS</p>
+                        <p>SUCCESS</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>

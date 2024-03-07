@@ -118,7 +118,26 @@
                             <p>Documents</p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('TrackingLog') }}"
+                            class="nav-link
+                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-map-marker"></i>
+                            <p>
+                                Incoming
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('TrackingLog') }}"
+                            class="nav-link
+                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-map-marker"></i>
+                            <p>
+                                Outgoing
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href=""
                             class="nav-link
