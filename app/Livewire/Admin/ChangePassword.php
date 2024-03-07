@@ -28,7 +28,7 @@ class ChangePassword extends Component
     public $id;
     public $password;
     public $c_password;
-   
+
     public $changePasswordVisible = false;
 
     protected $listeners = ['editPassword', 'showChangePassword', 'hideChangePassword'];
@@ -39,7 +39,7 @@ class ChangePassword extends Component
 
         $user = User::findOrFail($id);
         $this->password = $user->password;
-        
+
         $this->emit('showChangePassword'); // Emit an event to show the edit user form
     }
 
@@ -53,7 +53,7 @@ class ChangePassword extends Component
         $rules['c_password'] = 'required|string|same:password';
     }
 
-   
+
     try {
         // Validate the request data
         $validatedData = $this->validate($rules, [
@@ -61,15 +61,15 @@ class ChangePassword extends Component
         ], [
             'c_password.same' => 'Error updating password: The password confirmation does not match.',
         ]);
-    
+
         // Find the user by ID and update the fields
         $user = User::findOrFail($this->id);
-    
+
         // Update the fields individually only if they are present in the request
         if (isset($validatedData['password'])) {
             $user->password = $validatedData['password'];
         }
-    
+
         $result = $user->save();
         if ($result) {
             session()->flash('success', 'Password updated successfully!');

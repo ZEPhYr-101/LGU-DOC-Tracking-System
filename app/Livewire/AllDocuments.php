@@ -8,26 +8,49 @@ use App\Models\Category;
 use App\Models\Document;
 use App\Models\User;
 use Livewire\WithPagination;
-use Illuminate\Support\Facades\Request;
 
 class AllDocuments extends Component
 {
     use WithPagination;
+
     public $users;
-    public $categories;
     public $admins;
-    public $search = '';
+    public $categories;
+    public $category_id;
+    public $query;
+
+    protected $listeners = ['reloadDocuments'];
 
     public function mount()
     {
-
-        $this->categories = Category::all();
-        $this->users = User::all();
-        $this->admins = Admin::all();
+        $this->users = User::get();
+        $this->admins = Admin::get();
+        $this->categories = Category::get();
     }
+
     public function render()
     {
-        $documents = Document::where('documentName', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
-        return view('livewire.all-documents', ['documents' => $documents])->layout('layouts.main');
+        // Fetch documents with pagination
+        $documents = Document::query();
+
+        if ($this->category_id) {
+            $documents->where('category_id', $this->category_id);
+        }
+
+        if ($this->query) {
+            $documents->where('documentName', 'like', '%' . $this->query . '%');
+        }
+
+        $documents = $documents->orderByDesc('id')->paginate(10);
+
+        return view('livewire.all-documents', [
+            'documents' => $documents,
+        ])->layout('layouts.main');
+    }
+
+    public function reloadDocuments($category_id, $query)
+    {
+        $this->category_id = $category_id;
+        $this->query = $query;
     }
 }

@@ -64,7 +64,7 @@ class UploadDucuments extends Component
             session()->flash('error', 'Failed to upload document. Please try again.');
         }
 
-        return redirect()->route('alldocuments');
+        return redirect()->route('admin.documents');
     }
     public function render()
     {

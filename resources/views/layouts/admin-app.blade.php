@@ -111,32 +111,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('alldocuments') }}"
+                        <a href="{{ route('admin.documents') }}"
                             class="nav-link
-                    {{ $current_route == 'alldocuments' ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>All Documents</p>
+                    {{ $current_route == 'admin.documents' ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>Documents</p>
                         </a>
                     </li>
-                    @livewire('categories-dropdown')
-
-                    {{-- <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const documentsMenu = document.getElementById('documentsMenu');
-                        const isMenuOpen = localStorage.getItem('documentsMenuOpen');
-
-                        if (isMenuOpen === 'true') {
-                            documentsMenu.classList.add('menu-open');
-                        }
-
-                        documentsMenu.addEventListener('click', function() {
-                            const isOpen = documentsMenu.classList.contains('menu-open');
-                            localStorage.setItem('documentsMenuOpen', isOpen ? 'false' : 'true');
-                        });
-                    });
-                    </script> --}}
-
-
 
                     <li class="nav-item">
                         <a href="{{ route('TrackingLog') }}"

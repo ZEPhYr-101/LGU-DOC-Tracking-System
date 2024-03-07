@@ -36,14 +36,11 @@ Route::middleware(['web'])->group(function () {
     Route::get('user/login', Login::class)->name('user.login');
     Route::get('/add', AddDocuments::class)->name('add');
     Route::get('/uploadDocuments', UploadDucuments::class)->name('uploadDocuments');
-    Route::get('/alldocuments', AllDocuments::class)->name('alldocuments');
-
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
     Route::get('/user/document', Document::class)->name('user.documents');
 });
-//admin routes
 
 Route::middleware(['guest:admin'])->group(function () {
     Route::get('/admin/login', AdminLogin::class)->name('admin.login');
@@ -51,13 +48,10 @@ Route::middleware(['guest:admin'])->group(function () {
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
-
     Route::get('/admin/users', ApproveUser::class)->name('admin.users');
-    Route::get('admin/documents', Documents::class)->name('admin.documents');
     Route::get('admin/access-log', AccessLog::class)->name('AccessLog');
     Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');
     Route::get('admin/edit-user-form/{id}', EditUserForm::class)->name('editUserForm');
-    Route::get('admin/change-password/{id}', ChangePassword::class)->name('changePassword');
-
+    Route::get('admin/documents', Documents::class)->name('admin.documents');
 });

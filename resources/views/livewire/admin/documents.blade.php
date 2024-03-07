@@ -12,7 +12,6 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin.admin-dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">Documents</li>
-
                     </ol>
                 </div>
             </div>
@@ -54,80 +53,45 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card-header">
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 250px;">
-                                <input type="text" wire:model.live="search" name="table_search"
-                                    class="form-control float-right" placeholder="Search">
+                        <div class="row justify-content-between align-items-center">
+                            <!-- Adding justify-content-between to space items apart -->
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 200px;">
+                                    <input type="text" wire:model="query" wire:keyup.debounce="filter"
+                                        name="table_search" class="form-control float-right" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm" style="width: 250px">
+                                    <select wire:model="category_id" wire:change="filter" class="form-control">
+                                        <option value="">Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body table-responsive p-0" style="height: 650px;">
-                        <table class="table table-head-fixed table-striped text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>User</th>
-                                    <th>Document Name</th>
-                                    <th>Category</th>
-                                    <th>Description</th>
-                                    <th>Tracking No.</th>
-                                    <th>Download</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($documents as $document)
-                                    <tr>
-                                        @php
-                                            $admin = $admins->where('user_id_no', $document->user_id)->first();
-                                        @endphp
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ optional($admin)->username }}</td>
-                                        <td>{{ $document->documentName }}</td>
-                                        <td>
-                                            @if ($document->category && $categories)
-                                                @foreach ($categories as $category)
-                                                    @if ($category->id == $document->category_id)
-                                                        {{ $category->category_name }}
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                        <td>{{ $document->description }}</td>
-                                        <td>{{ $document->doc_tracking_code }}</td>
-                                        <td><a href="{{ Storage::url($document->document) }}"
-                                                target="_blank">Download</a></td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">No documents found.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                    @livewire('all-documents')
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @livewire('upload-ducuments')
                     </div>
                 </div>
-                {{-- <div class="card-footer clearfix">
-                    <ul class="pagination pagination-sm m-0 float-right">
-                        {{ $documents->links('custom-pagination-links-view') }}
-                    </ul>
-                </div> --}}
             </div>
         </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    @livewire('upload-ducuments')
-                </div>
-            </div>
-        </div>
-    </div>
