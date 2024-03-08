@@ -10,6 +10,7 @@ class Documents extends Component
 {
     public $category_id;
     public $query;
+    public $perPage = 10;
     public function render()
     {
         $categories = Category::get();
@@ -18,6 +19,6 @@ class Documents extends Component
 
     public function filter()
     {
-        $this->dispatch('reloadDocuments', $this->category_id, $this->query);
+        $this->dispatch('reloadDocuments', $this->category_id, $this->query, $this->perPage);
     }
 }

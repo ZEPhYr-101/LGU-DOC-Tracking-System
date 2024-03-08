@@ -56,14 +56,25 @@
                         <div class="row justify-content-between align-items-center">
                             <!-- Adding justify-content-between to space items apart -->
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 200px;">
-                                    <input type="text" wire:model="query" wire:keyup.debounce="filter"
-                                        name="table_search" class="form-control float-right" placeholder="Search">
+                                <div style="display: flex; align-items: center; gap: 1px;">
+                                    <div class="input-group input-group-sm" style="width: 60px;">
+                                        <select wire:model="perPage" wire:change="filter" class="form-control">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="75">75</option>
+                                            <option value="100">100</option>
+                                        </select>
+
+                                    </div>
+                                    <span>entries per page</span>
                                 </div>
                             </div>
                             <div class="card-tools">
-                                <div class="input-group input-group-sm" style="width: 250px">
-                                    <select wire:model="category_id" wire:change="filter" class="form-control">
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <input type="text" wire:model="query" wire:keyup.debounce="filter" name="table_search" class="form-control float-right" placeholder="Search" style="width: calc(100% - 215px); margin-right: 5px;">
+
+                                    <select wire:model="category_id" wire:change="filter" class="form-control" style="width: 200px;">
                                         <option value="">Select Category</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -74,7 +85,7 @@
                         </div>
                     </div>
                     @livewire('all-documents')
-                    
+
                 </div>
             </div>
         </div>
@@ -95,3 +106,5 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>

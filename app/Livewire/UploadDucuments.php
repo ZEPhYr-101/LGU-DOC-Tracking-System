@@ -29,43 +29,67 @@ class UploadDucuments extends Component
             'documentName' => 'required',
             'category' => 'required',
             'description' => 'required',
-            'document' => 'required|file|mimes:doc,docx,pdf,txt,rtf,odt,xls,xlsx,csv,jpg,jpeg,png,gif,bmp,svg,ppt,pptx',
+            'document' => 'required',
+            'document.*' => 'file|mimes:doc,docx,pdf,txt,rtf,odt,xls,xlsx,csv,jpg,jpeg,png,gif,bmp,svg,ppt,pptx',
         ]);
 
         $category = Category::findOrFail($validatedData['category']);
-
         $folderName = str_replace(' ', '_', $category->category_name);
+        $baseFolderPath = 'documents/' . $folderName;
 
-        $folderPath = 'documents/' . $folderName;
-
-        if (!Storage::exists($folderPath)) {
-            Storage::makeDirectory($folderPath, 0755, true);
+        // Ensure the base category folder exists
+        if (!Storage::exists($baseFolderPath)) {
+            Storage::makeDirectory($baseFolderPath, 0755, true);
         }
 
-        $filename = $validatedData['document']->store($folderPath, 'public');
+        $documents = is_array($validatedData['document']) ? $validatedData['document'] : [$validatedData['document']];
+        $imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
 
-        if ($filename) {
-            $document = new Document();
-            $document->documentName = $validatedData['documentName'];
-            $document->user_id = Auth::guard('admin')->user()->user_id_no;
-            $document->category_id = $validatedData['category'];
-            $document->description = $validatedData['description'];
-            $document->document = $filename;
-            $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
-            $document->save();
+        $images = collect($documents)->filter(fn ($doc) => in_array($doc->getClientOriginalExtension(), $imageTypes));
+        $nonImages = collect($documents)->reject(fn ($doc) => in_array($doc->getClientOriginalExtension(), $imageTypes));
 
-            $documentPath = Storage::url($filename);
-
-            session()->flash('success', 'Document uploaded successfully');
-            session()->flash('document_path', $documentPath);
-
-            $this->reset();
-        } else {
-            session()->flash('error', 'Failed to upload document. Please try again.');
+        // For multiple images, store them in a specific subfolder and save the folder path in the database
+        if ($images->count() > 0) {
+            $imageFolderPath = "{$baseFolderPath}/{$validatedData['documentName']}";
+            if (!Storage::exists($imageFolderPath)) {
+                Storage::makeDirectory($imageFolderPath, 0755, true);
+            }
+            foreach ($images as $image) {
+                $image->store($imageFolderPath, 'public');
+            }
+            // Save the image folder path for multiple images
+            $this->storeDocumentRecord($validatedData, $imageFolderPath, true);
         }
+
+        // Handle non-image files individually
+        foreach ($nonImages as $nonImage) {
+            $filePath = $nonImage->storeAs($baseFolderPath, $nonImage->getClientOriginalName(), 'public');
+            // For individual non-image files, save their paths
+            $this->storeDocumentRecord($validatedData, $filePath);
+        }
+
+        session()->flash('success', 'Document(s) uploaded successfully.');
+        $this->reset();
 
         return redirect()->route('admin.documents');
     }
+
+    protected function storeDocumentRecord($validatedData, $filePath, $isMultipleImages = false)
+    {
+        $document = new Document();
+        if (!$isMultipleImages) {
+            $document->documentName = basename($filePath); // For individual files, use the basename as the document name
+        } else {
+            $document->documentName = $validatedData['documentName']; // For multiple images, use the provided document name
+        }
+        $document->user_id = Auth::guard('admin')->user()->user_id_no;
+        $document->category_id = $validatedData['category'];
+        $document->description = $validatedData['description'];
+        $document->document = $filePath; // Store the folder path for multiple images, else individual file path
+        $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
+        $document->save();
+    }
+
     public function render()
     {
         return view('livewire.upload-ducuments')->layout('layouts.main');

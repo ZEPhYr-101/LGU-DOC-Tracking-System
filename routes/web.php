@@ -14,8 +14,6 @@ use App\Livewire\Admin\EditUserForm;
 use App\Livewire\Admin\ChangePassword;
 use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
-use App\Livewire\AllDocuments;
-use App\Livewire\CategoriesDropdown;
 use App\Livewire\UploadDucuments;
 use Illuminate\Support\Facades\Route;
 

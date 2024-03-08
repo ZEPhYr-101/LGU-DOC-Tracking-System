@@ -31,7 +31,7 @@
         <label for="document">Document</label>
         <div class="custom-file">
             <input type="file" name="document" id="document" wire:model.defer="document"
-                accept="image/*, .doc, .docx, .pdf, .txt, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, text/plain">
+                accept="image/*, .doc, .docx, .pdf, .txt, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, text/plain" multiple>
 
         </div>
         @error('document')

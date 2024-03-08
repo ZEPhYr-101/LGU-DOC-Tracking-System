@@ -19,6 +19,8 @@ class AllDocuments extends Component
     public $category_id;
     public $query;
 
+    public $perPage = 10;
+
     protected $listeners = ['reloadDocuments'];
 
     public function mount()
@@ -30,27 +32,35 @@ class AllDocuments extends Component
 
     public function render()
     {
-        // Fetch documents with pagination
-        $documents = Document::query();
+        // Start the query
+        $documentsQuery = Document::query();
 
+        // Filter by category_id if it's set
         if ($this->category_id) {
-            $documents->where('category_id', $this->category_id);
+            $documentsQuery->where('category_id', $this->category_id);
         }
 
+        // Apply search criteria if $this->query is set
         if ($this->query) {
-            $documents->where('documentName', 'like', '%' . $this->query . '%');
+            $documentsQuery->where(function ($query) {
+                $query->where('documentName', 'like', '%' . $this->query . '%')
+                    ->orWhere('doc_tracking_code', 'like', '%' . $this->query . '%');
+            });
         }
 
-        $documents = $documents->orderByDesc('id')->paginate(10);
+        // Apply ordering and paginate the results
+        $documents = $documentsQuery->orderByDesc('id')->paginate($this->perPage);
 
+        // Return the view with the paginated documents
         return view('livewire.all-documents', [
             'documents' => $documents,
         ])->layout('layouts.main');
     }
 
-    public function reloadDocuments($category_id, $query)
+    public function reloadDocuments($category_id, $query, $perPage)
     {
         $this->category_id = $category_id;
         $this->query = $query;
+        $this->perPage = $perPage;
     }
 }

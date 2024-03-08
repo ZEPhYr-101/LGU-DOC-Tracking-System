@@ -16,17 +16,10 @@
                 @forelse ($documents as $document)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $document->user_id}}</td>
+                        <td>{{ $document->user_id }}</td> <!-- Assuming a user() relationship exists -->
                         <td>{{ $document->documentName }}</td>
-                        <td>
-                            @if ($document->category && $categories)
-                                @foreach ($categories as $category)
-                                    @if ($category->id == $document->category_id)
-                                        {{ $category->category_name }}
-                                    @endif
-                                @endforeach
-                            @endif
-                        </td>
+                        <td>{{ $document->category->category_name ?? 'N/A' }}</td>
+                        <!-- Assuming a category() relationship exists and is eager loaded -->
                         <td>{{ $document->description }}</td>
                         <td>{{ $document->doc_tracking_code }}</td>
                         <td><a href="{{ Storage::url($document->document) }}" target="_blank">Download</a></td>
@@ -40,10 +33,8 @@
         </table>
     </div>
     <div class="card-footer clearfix">
-        <ul class="pagination pagination-sm m-0 float-right">
-            {{$documents->links('custom-pagination-links-view') }}
-        </ul>
+
+        {{ $documents->links('custom-pagination-links-view') }}
+
     </div>
 </div>
-
-

@@ -114,9 +114,9 @@
                         </table>
                     </div>
                     <div class="card-footer clearfix">
-                        <ul class="pagination pagination-sm m-0 float-right">
-                            {{ $users->links('custom-pagination-links-view') }}
-                        </ul>
+
+                        {{ $users->links('custom-pagination-links-view') }}
+
                     </div>
                 </div>
             </div>
