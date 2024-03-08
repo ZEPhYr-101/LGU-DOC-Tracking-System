@@ -119,9 +119,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('TrackingLog') }}"
+                        <a href="{{ route('incomingDocuments') }}"
                             class="nav-link
-                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
+                    {{ $current_route == 'incomingDocuments' ? 'active' : '' }}">
                             <i class="nav-icon fa fa-map-marker"></i>
                             <p>
                                 Incoming
