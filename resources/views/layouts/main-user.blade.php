@@ -108,7 +108,7 @@
 
 <body class="sidebar-mini layout-fixed  layout-footer-fixed" style="height: auto;">
 
-    @include('layouts.admin-app')
+    @include('layouts.user-app')
 
     <!-- REQUIRED SCRIPTS -->
 
@@ -142,6 +142,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- AdminLTE App -->
+
     @livewireScripts
     <script>
         @if (session('success'))

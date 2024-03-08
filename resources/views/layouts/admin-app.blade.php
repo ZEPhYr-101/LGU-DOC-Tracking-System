@@ -64,7 +64,7 @@
             class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
-                    <a>Login As: {{ Auth::guard('admin')->user()->username }}</a> <br>
+                    <a>Logged In As: {{ Auth::guard('admin')->user()->username }}</a> <br>
                     <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
@@ -118,7 +118,26 @@
                             <p>Documents</p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{{ route('TrackingLog') }}"
+                            class="nav-link
+                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-map-marker"></i>
+                            <p>
+                                Incoming
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('TrackingLog') }}"
+                            class="nav-link
+                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
+                            <i class="nav-icon fa fa-map-marker"></i>
+                            <p>
+                                Outgoing
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('TrackingLog') }}"
                             class="nav-link
@@ -198,7 +217,7 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 1.0
         </div>
-        <strong>Copyright © 2014 <a href="#">LGU Quezon</a>.</strong> All rights reserved.
+        <strong>Copyright © 2024 <a href="#">LGU Quezon</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->

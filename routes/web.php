@@ -14,6 +14,11 @@ use App\Livewire\Admin\EditUserForm;
 use App\Livewire\Admin\ChangePassword;
 use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
+<<<<<<< HEAD
+=======
+use App\Livewire\IncomingDocuments;
+use App\Livewire\AllDocuments;
+>>>>>>> 5844e3a8f64c5befa26ed56ae08b5eb567d0bfc0
 use App\Livewire\UploadDucuments;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +39,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('user/login', Login::class)->name('user.login');
     Route::get('/add', AddDocuments::class)->name('add');
     Route::get('/uploadDocuments', UploadDucuments::class)->name('uploadDocuments');
+    Route::get('/incomingDocuments', UploadDucuments::class)->name('incomingDocuments');
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
@@ -52,4 +58,5 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');
     Route::get('admin/edit-user-form/{id}', EditUserForm::class)->name('editUserForm');
     Route::get('admin/documents', Documents::class)->name('admin.documents');
+    Route::get('admin/change-password/{id}', ChangePassword::class)->name('admin.changePassword');
 });

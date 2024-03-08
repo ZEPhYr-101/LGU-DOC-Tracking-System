@@ -8,7 +8,7 @@
                     <th>Document Name</th>
                     <th>Category</th>
                     <th>Description</th>
-                    <th>Tracking No.</th>
+                    <th>Document No.</th>
                     <th>Download</th>
                 </tr>
             </thead>
