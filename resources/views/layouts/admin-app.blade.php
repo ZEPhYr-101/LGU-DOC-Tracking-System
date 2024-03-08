@@ -64,7 +64,7 @@
             class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
-                    <a>Login As: {{ Auth::guard('admin')->user()->username }}</a> <br>
+                    <a>Logged In As: {{ Auth::guard('admin')->user()->username }}</a> <br>
                     <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
