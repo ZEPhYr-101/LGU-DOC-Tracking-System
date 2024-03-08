@@ -22,7 +22,10 @@
                         <!-- Assuming a category() relationship exists and is eager loaded -->
                         <td>{{ $document->description }}</td>
                         <td>{{ $document->doc_tracking_code }}</td>
-                        <td><a href="{{ Storage::url($document->document) }}" target="_blank">Download</a></td>
+                        
+                        <td>
+                        <a href="{{ Storage::url($document->document) }}" target="_blank" class="btn btn-primary btn-sm">View</a>
+                        <a href="{{ Storage::url($document->document) }}" target="_blank" class="btn btn-warning btn-sm">Download</a></td>
                     </tr>
                 @empty
                     <tr>
