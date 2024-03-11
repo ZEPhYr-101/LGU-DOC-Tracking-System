@@ -3,6 +3,7 @@
 use App\Livewire\User\Dashboard;
 use App\Livewire\User\Register;
 use App\Livewire\User\Login;
+use App\Livewire\User\UserDocuments;
 use App\Livewire\Admin\AdminDashboard;
 use App\Livewire\Admin\AdminLogin;
 use App\Livewire\Admin\ApproveUser;
@@ -12,9 +13,10 @@ use App\Livewire\Admin\AccessLog;
 use App\Livewire\Admin\TrackingLog;
 use App\Livewire\Admin\EditUserForm;
 use App\Livewire\Admin\ChangePassword;
-use App\Livewire\User\Document;
 use App\Livewire\AddDocuments;
+use App\Livewire\Admin\AdminUploadDocuments;
 use App\Livewire\UploadDucuments;
+use App\Livewire\User\UserUploadDocuments;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +35,14 @@ Route::middleware(['web'])->group(function () {
     Route::get('user/register', Register::class)->name('user.register');
     Route::get('user/login', Login::class)->name('user.login');
     Route::get('/add', AddDocuments::class)->name('add');
-    Route::get('/uploadDocuments', UploadDucuments::class)->name('uploadDocuments');
-    Route::get('/incomingDocuments', UploadDucuments::class)->name('incomingDocuments');
+    Route::get('user/dashboard', Dashboard::class)->name('user.dashboard');
+    Route::get('user/documents', UserDocuments::class)->name('user.documents');
+    Route::get('user/uploadDocuments', UserUploadDocuments::class)->name('user.uploadDocuments');
+
+
 });
 Route::middleware(['auth'])->group(function () {
-    Route::get('/user/dashboard', Dashboard::class)->name('user.dashboard');
-    Route::get('/user/document', Document::class)->name('user.documents');
+
 });
 
 Route::middleware(['guest:admin'])->group(function () {
@@ -46,8 +50,9 @@ Route::middleware(['guest:admin'])->group(function () {
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
-    Route::get('/admin/users', ApproveUser::class)->name('admin.users');
+    Route::get('admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
+    Route::get('admin/uploadDocuments', AdminUploadDocuments::class)->name('admin.uploadDocuments');
+    Route::get('admin/users', ApproveUser::class)->name('admin.users');
     Route::get('admin/access-log', AccessLog::class)->name('AccessLog');
     Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
     Route::get('admin/user-management', UserManagement::class)->name('userManagement');

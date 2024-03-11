@@ -12,7 +12,7 @@ class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $filable = ['username', 'user_id_no','password'];
+    protected $filable = ['username', 'user_id_no', 'password'];
 
     /**
      * The attributes that are mass assignable.
@@ -42,4 +42,9 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isAdmin()
+    {
+        return true; // Since this is the Admin model, this always returns true
+    }
 }

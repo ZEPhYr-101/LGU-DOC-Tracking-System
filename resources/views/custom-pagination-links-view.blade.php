@@ -11,35 +11,27 @@
         </div>
     </div>
     <div class="col-sm-12 col-md-7 d-flex justify-content-end">
-        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-            <ul class="pagination">
+        <div class="dataTables_paginate paging_simple_numbers" id="example_paginate" style="overflow-x:auto;">
+            <ul class="pagination" style="display: flex; flex-wrap: nowrap; padding-bottom: 20px;">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
-                    <li class="paginate_button page-item previous disabled" id="example_previous">
-                        <span class="page-link">Previous</span>
-                    </li>
+                    <li class="page-item previous disabled"><a class="page-link">Previous</a></li>
                 @else
-                    <li class="paginate_button page-item previous">
-                        <button class="page-link" wire:click="previousPage" rel="prev">Previous</button>
-                    </li>
+                    <li class="page-item previous"><a class="page-link" href="#" wire:click.prevent="previousPage" rel="prev">Previous</a></li>
                 @endif
 
                 {{-- Pagination Element Links --}}
                 @foreach ($elements as $element)
                     @if (is_string($element))
-                        <li class="paginate_button page-item disabled"><span class="page-link">{{ $element }}</span></li>
+                        <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
                     @endif
 
                     @if (is_array($element))
                         @foreach ($element as $page => $url)
                             @if ($page == $paginator->currentPage())
-                                <li class="paginate_button page-item active">
-                                    <span class="page-link">{{ $page }}</span>
-                                </li>
+                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
                             @else
-                                <li class="paginate_button page-item">
-                                    <button class="page-link" wire:click='gotoPage({{ $page }})'>{{ $page }}</button>
-                                </li>
+                                <li class="page-item"><a class="page-link" href="#" wire:click.prevent='gotoPage({{ $page }})'>{{ $page }}</a></li>
                             @endif
                         @endforeach
                     @endif
@@ -47,13 +39,9 @@
 
                 {{-- Next Page Link --}}
                 @if ($paginator->hasMorePages())
-                    <li class="paginate_button page-item next" id="example_next">
-                        <button class="page-link" wire:click="nextPage" rel="next">Next</button>
-                    </li>
+                    <li class="page-item next"><a class="page-link" href="#" wire:click.prevent="nextPage" rel="next">Next</a></li>
                 @else
-                    <li class="paginate_button page-item next disabled" id="example_next">
-                        <span class="page-link">Next</span>
-                    </li>
+                    <li class="page-item next disabled"><span class="page-link">Next</span></li>
                 @endif
             </ul>
         </div>

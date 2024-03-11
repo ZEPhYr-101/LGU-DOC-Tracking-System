@@ -64,11 +64,11 @@
             class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-transition os-host-scrollbar-horizontal-hidden">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
-                    <a>Logged In As: {{ Auth::guard('web')->user()->fname }} {{ Auth::guard('web')->user()->lname }}</a> <br>
+                    <a>Logged In As: </a><br>
+                    <a> {{ Auth::guard('web')->user()->fname }} {{ Auth::guard('web')->user()->lname }}</a> <br>
                     <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
-
 
             <!-- Plus button for adding docs-->
             <div class="d-flex justify-content-center">
@@ -157,7 +157,7 @@
                             </p>
                         </a>
                     </li>
-                
+
                 </ul>
             </nav>
         </div>

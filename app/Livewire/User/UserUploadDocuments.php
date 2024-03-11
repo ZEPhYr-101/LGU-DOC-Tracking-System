@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\User;
 
 use App\Models\Category;
 use Livewire\Component;
@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
 
-class UploadDucuments extends Component
+class UserUploadDocuments extends Component
 {
     use WithFileUploads;
-
     public $documentName;
     public $category;
     public $description;
@@ -71,7 +70,7 @@ class UploadDucuments extends Component
         session()->flash('success', 'Document(s) uploaded successfully.');
         $this->reset();
 
-        return redirect()->route('admin.documents');
+        return redirect()->route('user.documents');
     }
 
     protected function storeDocumentRecord($validatedData, $filePath, $isMultipleImages = false)
@@ -82,16 +81,16 @@ class UploadDucuments extends Component
         } else {
             $document->documentName = $validatedData['documentName']; // For multiple images, use the provided document name
         }
-        $document->user_id = Auth::guard('admin')->user()->user_id_no;
+        $document->user_id = Auth::guard('web')->user()->user_id_no;
+        $document->office_id = Auth::guard('web')->user()->office_id;
         $document->category_id = $validatedData['category'];
         $document->description = $validatedData['description'];
         $document->document = $filePath; // Store the folder path for multiple images, else individual file path
         $document->doc_tracking_code = "DOCS-" . mt_rand(1000000000000, 9999999999999);
         $document->save();
     }
-
     public function render()
     {
-        return view('livewire.upload-ducuments')->layout('layouts.main');
+        return view('livewire.user.user-upload-documents');
     }
 }

@@ -11,52 +11,24 @@ class UserManagement extends Component
     use WithPagination;
 
     public $totalUser;
-    public $search = '';
-
-    protected $paginationTheme = 'bootstrap';
+    public $query;
+    public $perPage = 10;
 
     public function render()
     {
-        $usersQuery = User::orderBy('id', 'DESC');
-
-        if (!empty($this->search)) {
-            $usersQuery->where('fname', 'like', '%' . $this->search . '%')
-                       ->orWhere('lname', 'like', '%' . $this->search . '%')
-                       ->orWhere('user_id_no', 'like', '%'. $this->search. '%');
-        }
-
-        $users = $usersQuery->paginate(10);
+        $users = User::get();
         $totalUser = User::count();
-        return view('livewire.admin.user-management', compact('users', 'totalUser'))->layout('layouts.main');
 
-    }
+        $data = [
+            'users' => $users,
+            'totalUser' => $totalUser,
+        ];
 
-    public function approve($id)
-    {
-        $user = User::findOrFail($id);
-        $user->is_Accepted = 1;
-        $user->email_verified_at = now();
-        $result = $user->save();
-        if ($result) {
-            session()->flash('success', 'Admin Approved User');
-            $this->redirect('user-management', 'showSuccessMessage');
-        }
+        return view('livewire.admin.user-management',$data)->layout('layouts.main');
     }
 
-    public function delete($id)
+    public function filter()
     {
-        $user = User::findOrFail($id)->delete();
-        if ($user) {
-            session()->flash('success', 'User Deleted Successfully');
-            $this->redirect('user-management', 'showSuccessMessage');
-        }
-    }
-    public function editUserForm($id)
-    {
-        return redirect()->route('editUserForm', ['id' => $id]);
-    }
-    public function changePassword($id)
-    {
-        return redirect()->route('admin.changePassword', ['id' => $id]);
+        $this->dispatch('reloadUsers', $this->query, $this->perPage);
     }
 }

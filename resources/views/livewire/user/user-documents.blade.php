@@ -1,6 +1,6 @@
 <div>
     <x-slot name="title">
-        Admin | AllDocuments
+        User | Documents
     </x-slot>
     <div class="content-header">
         <div class="container-fluid">
@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.admin-dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('user.dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active">Documents</li>
                     </ol>
                 </div>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    @livewire('admin.all-admin-documents')
+                    @livewire('user.all-user-documents')
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @livewire('admin.admin-upload-documents')
+                        @livewire('user.user-upload-documents')
                     </div>
                 </div>
             </div>

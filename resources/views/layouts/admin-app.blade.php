@@ -68,8 +68,6 @@
                     <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
-
-
             <!-- Plus button for adding docs-->
             <div class="d-flex justify-content-center">
                 <div class="mt-3 pb-3 mb-3 d-flex">
@@ -122,7 +120,7 @@
                         <a href="{{ route('TrackingLog') }}"
                             class="nav-link
                     {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-map-marker"></i>
+                            <i class="nav-icon fas fa-file-download"></i>
                             <p>
                                 Incoming
                             </p>
@@ -132,7 +130,7 @@
                         <a href="{{ route('TrackingLog') }}"
                             class="nav-link
                     {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
-                            <i class="nav-icon fa fa-map-marker"></i>
+                            <i class="nav-icon fa fa-paper-plane"></i>
                             <p>
                                 Outgoing
                             </p>
