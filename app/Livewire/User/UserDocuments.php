@@ -4,6 +4,7 @@ namespace App\Livewire\User;
 
 use App\Models\Category;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UserDocuments extends Component
@@ -20,7 +21,7 @@ class UserDocuments extends Component
 
         // Fetch only documents that belong to the authenticated user based on user_id_no
         // Assuming you have the user_id_no available from the authenticated user
-        $user_id_no = auth()->user()->user_id_no;
+        $user_id_no = Auth::guard('user')->user()->user_id_no;
         $documents = Document::where('user_id', $user_id_no)->get();
 
         // Count only documents that belong to the authenticated user based on user_id_no

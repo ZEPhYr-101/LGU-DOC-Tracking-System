@@ -35,7 +35,7 @@ class AllUserDocuments extends Component
     public function render()
     {
         // Get the logged-in user's user_id_no directly
-        $user_id_no = auth()->user()->user_id_no;
+        $user_id_no = Auth::guard('user')->user()->user_id_no;
 
         // Start with a base query for documents
         $documentsQuery = Document::where('user_id', $user_id_no);

@@ -15,6 +15,7 @@ use App\Livewire\Admin\EditUserForm;
 use App\Livewire\Admin\ChangePassword;
 use App\Livewire\AddDocuments;
 use App\Livewire\Admin\AdminUploadDocuments;
+use App\Livewire\IncomingDocuments;
 use App\Livewire\UploadDucuments;
 use App\Livewire\User\UserUploadDocuments;
 use Illuminate\Support\Facades\Route;
@@ -30,28 +31,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('user/register', Register::class)->name('user.register');
+Route::get('user/login', Login::class)->name('user.login');
+Route::get('/admin/login', AdminLogin::class)->name('admin.login');
 
-Route::middleware(['web'])->group(function () {
-    Route::get('user/register', Register::class)->name('user.register');
-    Route::get('user/login', Login::class)->name('user.login');
+Route::group(['middleware' => ['User_auth']], function () {
     Route::get('/add', AddDocuments::class)->name('add');
     Route::get('user/dashboard', Dashboard::class)->name('user.dashboard');
     Route::get('user/documents', UserDocuments::class)->name('user.documents');
-    Route::get('user/uploadDocuments', UserUploadDocuments::class)->name('user.uploadDocuments');
-
-
-});
-Route::middleware(['auth'])->group(function () {
-
+    Route::get('user/incomingDocs', IncomingDocuments::class)->name('user.incomingDocs');
 });
 
-Route::middleware(['guest:admin'])->group(function () {
-    Route::get('/admin/login', AdminLogin::class)->name('admin.login');
-});
-
-Route::middleware(['auth:admin'])->group(function () {
+Route::group(['middleware' => ['Admin_auth']], function (){
     Route::get('admin/dashboard', AdminDashboard::class)->name('admin.admin-dashboard');
-    Route::get('admin/uploadDocuments', AdminUploadDocuments::class)->name('admin.uploadDocuments');
     Route::get('admin/users', ApproveUser::class)->name('admin.users');
     Route::get('admin/access-log', AccessLog::class)->name('AccessLog');
     Route::get('admin/tracking-log', TrackingLog::class)->name('TrackingLog');
@@ -60,3 +52,4 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('admin/documents', Documents::class)->name('admin.documents');
     Route::get('admin/change-password/{id}', ChangePassword::class)->name('admin.changePassword');
 });
+

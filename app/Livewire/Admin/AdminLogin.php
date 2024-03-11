@@ -24,7 +24,6 @@ class AdminLogin extends Component
         $admins = Auth::guard('admin')->attempt(['username' => $this->username, 'password' => $this->password]);
         if ($admins) {
             return redirect(route('admin.admin-dashboard'));
-            session()->flash('success', 'Login Successfully');
         } else {
             session()->flash('error', 'Invalid Creditional');
         }

@@ -65,7 +65,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex text-center">
                 <div class="info">
                     <a>Logged In As: </a><br>
-                    <a> {{ Auth::guard('web')->user()->fname }} {{ Auth::guard('web')->user()->lname }}</a> <br>
+                    <a> {{ Auth::guard('user')->user()->fname }} {{ Auth::guard('user')->user()->lname }}</a> <br>
                     <a id="dateTimeDisplay">{{ date('F j, Y, g:i a') }}</a>
                 </div>
             </div>
@@ -119,9 +119,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('incomingDocuments') }}"
+                        <a href="{{ route('TrackingLog') }}"
                             class="nav-link
-                    {{ $current_route == 'incomingDocuments' ? 'active' : '' }}">
+                    {{ $current_route == 'TrackingLog' ? 'active' : '' }}">
                             <i class="nav-icon fa fa-map-marker"></i>
                             <p>
                                 Incoming

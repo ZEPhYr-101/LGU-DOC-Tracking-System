@@ -81,8 +81,8 @@ class UserUploadDocuments extends Component
         } else {
             $document->documentName = $validatedData['documentName']; // For multiple images, use the provided document name
         }
-        $document->user_id = Auth::guard('web')->user()->user_id_no;
-        $document->office_id = Auth::guard('web')->user()->office_id;
+        $document->user_id = Auth::guard('user')->user()->user_id_no;
+        $document->office_id = Auth::guard('user')->user()->office_id;
         $document->category_id = $validatedData['category'];
         $document->description = $validatedData['description'];
         $document->document = $filePath; // Store the folder path for multiple images, else individual file path

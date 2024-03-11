@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -20,14 +21,14 @@ class Login extends Component
         'password' => ['required', 'string', 'min:3', 'max:12']
     ]);
 
-    $user = \App\Models\User::where('email', $this->email)->first();
+    $user = User::where('email', $this->email)->first();
 
     if ($user && $user->is_Accepted == "0") {
         session()->flash('error', 'Please verify your email');
         return;
     }
-
-    if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+    $users = Auth::guard('user')->attempt(['email' => $this->email, 'password' => $this->password]);
+    if ($users) {
         return redirect(route('user.dashboard'));
     } else {
         session()->flash('error', 'Invalid email and password');

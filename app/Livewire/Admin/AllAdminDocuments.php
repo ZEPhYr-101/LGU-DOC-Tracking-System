@@ -36,7 +36,7 @@ class AllAdminDocuments extends Component
     {
         // Determine if the logged-in user is an admin or a regular user
         $is_admin = Auth::guard('admin')->check(); // True if an admin is logged in
-        $is_user = Auth::guard('web')->check(); // True if a regular user is logged in
+        $is_user = Auth::guard('user')->check(); // True if a regular user is logged in
 
         // Initialize variables
         $user_id = null; // Changed from $user_id_no to $user_id for clarity
@@ -46,7 +46,7 @@ class AllAdminDocuments extends Component
         if ($is_admin) {
             $user = Auth::guard('admin')->user();
         } elseif ($is_user) {
-            $user = Auth::guard('web')->user();
+            $user = Auth::guard('user')->user();
         }
 
         // If a user is logged in (whether admin or regular user), proceed to set necessary variables

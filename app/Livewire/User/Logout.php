@@ -14,7 +14,7 @@ class Logout extends Component
 
     public function logout()
     {
-        Auth::logout();
+        Auth::guard('user')->logout();
         return redirect(route('user.login'));
     }
 }
